@@ -23,6 +23,7 @@ public class Pays
     {
     }
 
+
     public String getNom()
     {
         return nom;

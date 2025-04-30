@@ -26,6 +26,7 @@ public class Lieu
     {
     }
 
+
     public Long getId()
     {
         return id;

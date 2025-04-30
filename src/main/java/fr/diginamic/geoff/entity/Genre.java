@@ -21,12 +21,13 @@ public class Genre
     @JoinTable(name = "Films_Genres",
             inverseJoinColumns = @JoinColumn(name = "Id_Film", referencedColumnName = "Id_Film"),
             joinColumns = @JoinColumn(name = "Id_Genre", referencedColumnName = "Id_Genre"))
-    private List<Film> films =new ArrayList<>();
+    private List<Film> films = new ArrayList<>();
 
 
     public Genre()
     {
     }
+
 
     public Long getId()
     {

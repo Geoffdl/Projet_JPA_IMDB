@@ -34,4 +34,24 @@ public class Acteur extends Personne
     {
         this.taille = taille;
     }
+
+    public List<Film> getFilms()
+    {
+        return films;
+    }
+
+    public void setFilms(List<Film> films)
+    {
+        this.films = films;
+    }
+
+    public List<Role> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles)
+    {
+        this.roles = roles;
+    }
 }

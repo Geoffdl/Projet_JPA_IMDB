@@ -33,8 +33,8 @@ public class Film
     @JoinColumn(name = "Id_Pays", referencedColumnName = "Id_Pays")
     private Pays pays;
 
-//    @OneToMany(mappedBy = "films")
-//    private List<Role> roles;
+    @OneToMany(mappedBy = "film")
+    private List<Role> roles;
 
     @ManyToMany(mappedBy = "films")
     private List<Genre> genres = new ArrayList<>();
@@ -44,6 +44,19 @@ public class Film
     private List<Acteur> acteurs = new ArrayList<>();
 
 
+    public Film()
+    {
+    }
+
+    public List<Role> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles)
+    {
+        this.roles = roles;
+    }
 
     public List<Genre> getGenres()
     {
@@ -75,9 +88,7 @@ public class Film
         this.acteurs = acteurs;
     }
 
-    public Film()
-    {
-    }
+
 
     public String getIdImdb()
     {

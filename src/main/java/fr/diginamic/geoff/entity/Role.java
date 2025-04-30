@@ -2,22 +2,12 @@ package fr.diginamic.geoff.entity;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-
 @Entity
 @Table(name = "Roles")
-@IdClass(RoleId.class)
 public class Role
 {
-
-    @Id
-    @Column(name = "Id_Acteur")
-    private String idActeur;
-
-    @Id
-    @Column(name = "Id_Film")
-    private String idFilm;
-
+    @EmbeddedId
+    private RoleId id;
 
     @ManyToOne
     @JoinColumn(name = "Id_Acteur", referencedColumnName = "Id_Personne")
@@ -64,11 +54,53 @@ public class Role
     {
         this.personnage = personnage;
     }
+
+    public RoleId getId()
+    {
+        return id;
+    }
+
+    public void setId(RoleId id)
+    {
+        this.id = id;
+    }
 }
 
+@Embeddable
 class RoleId
 {
+    @Column(name = "Id_Acteur")
     private String idActeur;
+    @Column(name = "Id_Film")
     private String idFilm;
 
+    public RoleId()
+    {
+    }
+
+    public RoleId(String idActeur, String idFilm)
+    {
+        this.idActeur = idActeur;
+        this.idFilm = idFilm;
+    }
+
+    public String getIdActeur()
+    {
+        return idActeur;
+    }
+
+    public void setIdActeur(String idActeur)
+    {
+        this.idActeur = idActeur;
+    }
+
+    public String getIdFilm()
+    {
+        return idFilm;
+    }
+
+    public void setIdFilm(String idFilm)
+    {
+        this.idFilm = idFilm;
+    }
 }
