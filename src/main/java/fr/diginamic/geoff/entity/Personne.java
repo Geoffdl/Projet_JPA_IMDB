@@ -10,18 +10,19 @@ import java.time.LocalDate;
 public abstract class Personne
 {
     @Id
-    @Column(name = "Id_Personne")
+    @Column(name = "Id_Personne", length = 10)
     private String id_Imdb;
 
-    @Column(name = "Nom")
+    @Column(name = "Nom", length = 50)
     private String nom;
 
-    @Column(name = "Prenom")
+    @Column(name = "Prenom", length = 50)
     private String prenom;
 
     @Column(name = "Date_Naissance")
     private LocalDate dateNaissance;
-    @Column(name = "Url")
+
+    @Column(name = "Url", length = 255)
     private String url;
 
     @OneToOne

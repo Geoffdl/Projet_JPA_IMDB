@@ -8,14 +8,14 @@ public class Lieu
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_Lieu")
+    @Column(name = "Id_Lieu", length = 11)
     private Long id;
 
-    @Column(name = "Region")
+    @Column(name = "Region", length = 50)
     private String region;
-    @Column(name = "Ville")
+    @Column(name = "Ville", length = 50)
     private String ville;
-    @Column(name = "Libelle")
+    @Column(name = "Libelle", length = 255)
     private String libelle;
 
     @OneToOne

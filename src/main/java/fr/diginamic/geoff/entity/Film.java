@@ -11,18 +11,18 @@ import java.util.List;
 public class Film
 {
     @Id
-    @Column(name = "Id_Film")
+    @Column(name = "Id_Film", length = 50)
     private String idImdb;
 
-    @Column(name = "Titre")
+    @Column(name = "Titre", length = 50)
     private String titre;
     @Column(name = "Annee")
     private Year annee;
     @Column(name = "Rating")
     private Float rating;
-    @Column(name = "Langue")
+    @Column(name = "Langue", length = 50)
     private String langue;
-    @Column(name = "Resume")
+    @Column(name = "Resume", length = 255)
     private String resume;
 
     @ManyToOne

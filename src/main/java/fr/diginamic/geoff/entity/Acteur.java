@@ -9,7 +9,7 @@ import java.util.List;
 public class Acteur extends Personne
 {
     @Column(name = "Taille")
-    private String taille;
+    private Float taille;
 
 
     @ManyToMany
@@ -25,33 +25,57 @@ public class Acteur extends Personne
     {
     }
 
-    public String getTaille()
-    {
+    /**
+     * Gets taille for the class Acteur
+     *
+     * @return value of taille
+     */
+    public Float getTaille() {
         return taille;
     }
 
-    public void setTaille(String taille)
-    {
+    /**
+     * Sets taille for the class Acteur.
+     *
+     * @param taille value of taille
+     */
+    public void setTaille(Float taille) {
         this.taille = taille;
     }
 
-    public List<Film> getFilms()
-    {
+    /**
+     * Gets films for the class Acteur
+     *
+     * @return value of films
+     */
+    public List<Film> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Film> films)
-    {
+    /**
+     * Sets films for the class Acteur.
+     *
+     * @param films value of films
+     */
+    public void setFilms(List<Film> films) {
         this.films = films;
     }
 
-    public List<Role> getRoles()
-    {
+    /**
+     * Gets roles for the class Acteur
+     *
+     * @return value of roles
+     */
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles)
-    {
+    /**
+     * Sets roles for the class Acteur.
+     *
+     * @param roles value of roles
+     */
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

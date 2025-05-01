@@ -22,11 +22,13 @@ public class Main
     public static void main(String[] args)
     {
 
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("imdb");
-//        EntityManager em = emf.createEntityManager();
-//        EntityTransaction transaction = em.getTransaction();
 
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("imdb");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
 
+        em.close();
+        emf.close();
         try
         {
             JsonParser parser = new JsonParser();
