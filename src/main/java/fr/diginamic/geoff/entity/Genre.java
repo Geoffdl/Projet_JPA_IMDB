@@ -11,10 +11,10 @@ public class Genre
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id_Genre")
+    @Column(name = "Id_Genre", length = 11)
     private Long id;
 
-    @Column(name = "Nom")
+    @Column(name = "Nom", length = 50)
     private String nom;
 
     @ManyToMany

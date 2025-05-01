@@ -10,14 +10,14 @@ public class Role
     private RoleId id;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Acteur", referencedColumnName = "Id_Personne")
+    @JoinColumn(name = "Id_Acteur", referencedColumnName = "Id_Personne", insertable = false,updatable = false)
     private Acteur acteur;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Film", referencedColumnName = "Id_Film")
+    @JoinColumn(name = "Id_Film", referencedColumnName = "Id_Film", insertable = false, updatable = false)
     private Film film;
 
-    @Column(name = "Personnage")
+    @Column(name = "Personnage", length = 50)
     private String personnage;
 
 
@@ -69,9 +69,9 @@ public class Role
 @Embeddable
 class RoleId
 {
-    @Column(name = "Id_Acteur")
+    @Column(name = "Id_Acteur", length = 50)
     private String idActeur;
-    @Column(name = "Id_Film")
+    @Column(name = "Id_Film", length = 50)
     private String idFilm;
 
     public RoleId()

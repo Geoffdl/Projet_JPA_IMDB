@@ -9,10 +9,10 @@ import java.util.List;
 public class Pays
 {
     @Id
-    @Column(name = "Id_Pays")
+    @Column(name = "Id_Pays", length = 50)
     private String nom;
 
-    @Column(name = "URL")
+    @Column(name = "URL", length = 255)
     private String url;
 
     @OneToMany
