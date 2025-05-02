@@ -29,16 +29,16 @@ public class Main
 
         em.close();
         emf.close();
-        try
-        {
-            JsonParser parser = new JsonParser();
-            List<FilmDTO> films = parser.tryReading(FilmDTO.class, JSONURL);
-
-
-        } catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+//        try
+//        {
+//            JsonParser parser = new JsonParser();
+//            List<FilmDTO> films = parser.tryReading(FilmDTO.class, JSONURL);
+//
+//
+//        } catch (IOException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
 
 
     }

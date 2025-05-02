@@ -6,18 +6,20 @@ import jakarta.persistence.*;
 @Table(name = "Roles")
 public class Role
 {
-    @EmbeddedId
-    private RoleId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id", length = 11)
+    private Long roleId;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Acteur", referencedColumnName = "Id_Personne", insertable = false,updatable = false)
+    @JoinColumn(name = "acteur_id", referencedColumnName = "personne_id")
     private Acteur acteur;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Film", referencedColumnName = "Id_Film", insertable = false, updatable = false)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
     private Film film;
 
-    @Column(name = "Personnage", length = 50)
+    @Column(name = "personnage", length = 50)
     private String personnage;
 
 
@@ -25,82 +27,75 @@ public class Role
     {
     }
 
-    public Acteur getActeur()
-    {
+    /**
+     * Gets roleId for the class Role
+     *
+     * @return value of roleId
+     */
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    /**
+     * Sets roleId for the class Role.
+     *
+     * @param roleId value of roleId
+     */
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    /**
+     * Gets acteur for the class Role
+     *
+     * @return value of acteur
+     */
+    public Acteur getActeur() {
         return acteur;
     }
 
-    public void setActeur(Acteur acteur)
-    {
+    /**
+     * Sets acteur for the class Role.
+     *
+     * @param acteur value of acteur
+     */
+    public void setActeur(Acteur acteur) {
         this.acteur = acteur;
     }
 
-    public Film getFilm()
-    {
+    /**
+     * Gets film for the class Role
+     *
+     * @return value of film
+     */
+    public Film getFilm() {
         return film;
     }
 
-    public void setFilm(Film film)
-    {
+    /**
+     * Sets film for the class Role.
+     *
+     * @param film value of film
+     */
+    public void setFilm(Film film) {
         this.film = film;
     }
 
-    public String getPersonnage()
-    {
+    /**
+     * Gets personnage for the class Role
+     *
+     * @return value of personnage
+     */
+    public String getPersonnage() {
         return personnage;
     }
 
-    public void setPersonnage(String personnage)
-    {
+    /**
+     * Sets personnage for the class Role.
+     *
+     * @param personnage value of personnage
+     */
+    public void setPersonnage(String personnage) {
         this.personnage = personnage;
-    }
-
-    public RoleId getId()
-    {
-        return id;
-    }
-
-    public void setId(RoleId id)
-    {
-        this.id = id;
-    }
-}
-
-@Embeddable
-class RoleId
-{
-    @Column(name = "Id_Acteur", length = 50)
-    private String idActeur;
-    @Column(name = "Id_Film", length = 50)
-    private String idFilm;
-
-    public RoleId()
-    {
-    }
-
-    public RoleId(String idActeur, String idFilm)
-    {
-        this.idActeur = idActeur;
-        this.idFilm = idFilm;
-    }
-
-    public String getIdActeur()
-    {
-        return idActeur;
-    }
-
-    public void setIdActeur(String idActeur)
-    {
-        this.idActeur = idActeur;
-    }
-
-    public String getIdFilm()
-    {
-        return idFilm;
-    }
-
-    public void setIdFilm(String idFilm)
-    {
-        this.idFilm = idFilm;
     }
 }
