@@ -1,7 +1,7 @@
 package fr.diginamic.geoff.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.diginamic.geoff.deserializer.LocalDateDeserializer;
+import fr.diginamic.geoff.dto.deserializer.LocalDateDeserializer;
 
 import java.time.LocalDate;
 /**

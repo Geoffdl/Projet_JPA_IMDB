@@ -1,7 +1,5 @@
 package fr.diginamic.geoff;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.diginamic.geoff.dto.FilmDTO;
 import fr.diginamic.geoff.dto.parser.JsonParser;
 import jakarta.persistence.EntityManager;
@@ -9,15 +7,16 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
-import java.io.File;
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.List;
 
-
-public class Main
+public class App
 {
-    public static final String JSONURL = "D:\\Geoff\\Diginamic\\CDA\\Cours\\18_Projet_JPA_Individuel\\Projet\\Projet_IMDB\\src\\main\\resources\\films.json";
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+    public static final String JSONURL = "src/main/resources/films.json";
 
     public static void main(String[] args)
     {
@@ -29,16 +28,16 @@ public class Main
 
         em.close();
         emf.close();
-//        try
-//        {
-//            JsonParser parser = new JsonParser();
-//            List<FilmDTO> films = parser.tryReading(FilmDTO.class, JSONURL);
-//
-//
-//        } catch (IOException e)
-//        {
-//            throw new RuntimeException(e);
-//        }
+        try
+        {
+            JsonParser parser = new JsonParser();
+            List<FilmDTO> films = parser.tryReading(FilmDTO.class, JSONURL);
+
+
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
 
 
     }

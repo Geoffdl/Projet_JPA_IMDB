@@ -8,6 +8,11 @@ public class LieuTournageMapper implements EntityMapper<LieuTournageDTO, Lieu> {
 
     @Override
     public Lieu mapToEntity(LieuTournageDTO dto) {
+        Lieu lieu = new Lieu();
+
+        lieu.setRegion(dto.getEtatDept());
+        lieu.setVille(dto.getVille());
+
         return null;
     }
 }

@@ -76,7 +76,7 @@ The application is based on a normalized data model inspired by IMDB, supporting
 
 5. **Run the application:**
    ```bash
-   mvn exec:java -Dexec.mainClass="fr.diginamic.geoff.Main"
+   mvn exec:java -Dexec.mainClass="fr.diginamic.geoff.App"
    ```
 
 ---

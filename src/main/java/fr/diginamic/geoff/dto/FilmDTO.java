@@ -2,8 +2,8 @@ package fr.diginamic.geoff.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import fr.diginamic.geoff.deserializer.FloatDeserializer;
-import fr.diginamic.geoff.deserializer.YearDeserializer;
+import fr.diginamic.geoff.dto.deserializer.FloatDeserializer;
+import fr.diginamic.geoff.dto.deserializer.YearDeserializer;
 
 import java.time.Year;
 import java.util.List;
@@ -29,7 +29,7 @@ public class FilmDTO
 
     private String plot;
     private String langue;
-    private LieuTournageDTO lieuTouraage;
+    private LieuTournageDTO lieuTournage;
     private List<PersonneDTO> realisateurs;
     private List<ActeurDTO> castingPrincipal;
 
@@ -180,17 +180,17 @@ public class FilmDTO
      *
      * @return value of lieuTouraage
      */
-    public LieuTournageDTO getLieuTouraage() {
-        return lieuTouraage;
+    public LieuTournageDTO getLieuTournage() {
+        return lieuTournage;
     }
 
     /**
      * Sets lieuTouraage for the class FilmDTO.
      *
-     * @param lieuTouraage value of lieuTouraage
+     * @param lieuTournage value of lieuTouraage
      */
-    public void setLieuTouraage(LieuTournageDTO lieuTouraage) {
-        this.lieuTouraage = lieuTouraage;
+    public void setLieuTournage(LieuTournageDTO lieuTournage) {
+        this.lieuTournage = lieuTournage;
     }
 
     /**
@@ -293,7 +293,7 @@ public class FilmDTO
         sb.append(", rating=").append(rating);
         sb.append(", plot='").append(plot).append('\'');
         sb.append(", langue='").append(langue).append('\'');
-        sb.append(", lieuTouraage=").append(lieuTouraage);
+        sb.append(", lieuTouraage=").append(lieuTournage);
         sb.append(", realisateurs=").append(realisateurs);
         sb.append(", castingPrincipal=").append(castingPrincipal);
         sb.append(", anneeSortie=").append(anneeSortie);
