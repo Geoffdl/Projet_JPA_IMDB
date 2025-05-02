@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Main
 {
-    private static final String JSONURL = "D:\\Geoff\\Diginamic\\CDA\\Cours\\18_Projet_JPA_Individuel\\Projet\\Projet_IMDB\\src\\main\\resources\\films.json";
+    public static final String JSONURL = "D:\\Geoff\\Diginamic\\CDA\\Cours\\18_Projet_JPA_Individuel\\Projet\\Projet_IMDB\\src\\main\\resources\\films.json";
 
     public static void main(String[] args)
     {
@@ -33,8 +33,6 @@ public class Main
         {
             JsonParser parser = new JsonParser();
             List<FilmDTO> films = parser.tryReading(FilmDTO.class, JSONURL);
-
-            films.stream().forEach(filmDTO -> System.out.println(filmDTO));
 
 
         } catch (IOException e)
