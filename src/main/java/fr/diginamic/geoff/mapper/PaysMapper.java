@@ -1,4 +1,4 @@
 package fr.diginamic.geoff.mapper;
 
-public class RealisateurMapper {
+public class PaysMapper {
 }
