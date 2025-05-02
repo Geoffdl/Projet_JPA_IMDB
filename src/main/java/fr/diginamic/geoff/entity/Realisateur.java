@@ -12,8 +12,8 @@ public class Realisateur extends Personne
 
     @ManyToMany
     @JoinTable(name = "Films_Realisateurs",
-            joinColumns = @JoinColumn(name = "Id_Realisateur", referencedColumnName = "Id_Personne"),
-            inverseJoinColumns = @JoinColumn(name = "Id_Film", referencedColumnName = "Id_Film"))
+            joinColumns = @JoinColumn(name = "realisateur_id", referencedColumnName = "personne_id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"))
     List<Film> films;
 
 
@@ -22,13 +22,21 @@ public class Realisateur extends Personne
     {
     }
 
-    public List<Film> getFilms()
-    {
+    /**
+     * Gets films for the class Realisateur
+     *
+     * @return value of films
+     */
+    public List<Film> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Film> films)
-    {
+    /**
+     * Sets films for the class Realisateur.
+     *
+     * @param films value of films
+     */
+    public void setFilms(List<Film> films) {
         this.films = films;
     }
 }

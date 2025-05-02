@@ -8,14 +8,14 @@ import java.util.List;
 @Table(name = "Acteurs")
 public class Acteur extends Personne
 {
-    @Column(name = "Taille")
+    @Column(name = "taille")
     private Float taille;
 
 
     @ManyToMany
     @JoinTable(name = "CastingPrincipal",
-            joinColumns = @JoinColumn(name = "Id_Acteur", referencedColumnName = "Id_Personne"),
-            inverseJoinColumns = @JoinColumn(name = "Id_Film", referencedColumnName = "Id_Film"))
+            joinColumns = @JoinColumn(name = "acteur_id", referencedColumnName = "personne_id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"))
     List<Film> films;
 
     @OneToMany(mappedBy = "acteur")

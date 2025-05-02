@@ -10,23 +10,27 @@ import java.time.LocalDate;
 public abstract class Personne
 {
     @Id
-    @Column(name = "Id_Personne", length = 10)
-    private String id_Imdb;
+    @Column(name = "personne_id", length = 11)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long personneId;
 
-    @Column(name = "Nom", length = 50)
+    @Column(name = "id_imdb", length = 9)
+    private String imdbId;
+
+    @Column(name = "nom", length = 50)
     private String nom;
 
-    @Column(name = "Prenom", length = 50)
+    @Column(name = "prenom", length = 50)
     private String prenom;
 
-    @Column(name = "Date_Naissance")
+    @Column(name = "dateNaissance")
     private LocalDate dateNaissance;
 
-    @Column(name = "Url", length = 255)
+    @Column(name = "url", length = 255)
     private String url;
 
     @OneToOne
-    @JoinColumn(name = "Id_Lieux_Naissance")
+    @JoinColumn(name = "lieu_id")
     private Lieu lieuxNaissance;
 
 
@@ -34,65 +38,120 @@ public abstract class Personne
     {
     }
 
-
-
-    public String getId_Imdb()
-    {
-        return id_Imdb;
+    /**
+     * Gets personneId for the class Personne
+     *
+     * @return value of personneId
+     */
+    public Long getPersonneId() {
+        return personneId;
     }
 
-    public void setId_Imdb(String id_Imdb)
-    {
-        this.id_Imdb = id_Imdb;
+    /**
+     * Gets imdbId for the class Personne
+     *
+     * @return value of imdbId
+     */
+    public String getImdbId() {
+        return imdbId;
     }
 
-    public String getNom()
-    {
+    /**
+     * Sets imdbId for the class Personne.
+     *
+     * @param imdbId value of imdbId
+     */
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    /**
+     * Gets nom for the class Personne
+     *
+     * @return value of nom
+     */
+    public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom)
-    {
+    /**
+     * Sets nom for the class Personne.
+     *
+     * @param nom value of nom
+     */
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public String getPrenom()
-    {
+    /**
+     * Gets prenom for the class Personne
+     *
+     * @return value of prenom
+     */
+    public String getPrenom() {
         return prenom;
     }
 
-    public void setPrenom(String prenom)
-    {
+    /**
+     * Sets prenom for the class Personne.
+     *
+     * @param prenom value of prenom
+     */
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
-    public LocalDate getDateNaissance()
-    {
+    /**
+     * Gets dateNaissance for the class Personne
+     *
+     * @return value of dateNaissance
+     */
+    public LocalDate getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(LocalDate dateNaissance)
-    {
+    /**
+     * Sets dateNaissance for the class Personne.
+     *
+     * @param dateNaissance value of dateNaissance
+     */
+    public void setDateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
-    public String getUrl()
-    {
+    /**
+     * Gets url for the class Personne
+     *
+     * @return value of url
+     */
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url)
-    {
+    /**
+     * Sets url for the class Personne.
+     *
+     * @param url value of url
+     */
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public Lieu getLieuxNaissance()
-    {
+    /**
+     * Gets lieuxNaissance for the class Personne
+     *
+     * @return value of lieuxNaissance
+     */
+    public Lieu getLieuxNaissance() {
         return lieuxNaissance;
     }
 
-    public void setLieuxNaissance(Lieu lieuxNaissance)
-    {
+    /**
+     * Sets lieuxNaissance for the class Personne.
+     *
+     * @param lieuxNaissance value of lieuxNaissance
+     */
+    public void setLieuxNaissance(Lieu lieuxNaissance) {
         this.lieuxNaissance = lieuxNaissance;
     }
 }

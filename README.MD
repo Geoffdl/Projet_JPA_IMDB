@@ -43,6 +43,7 @@ The application is based on a normalized data model inspired by IMDB, supporting
 - **MySQL** 
 - **Maven** 
 - **LogBack (for log generation)**
+- **Jupiter (unit testing)**
 
 ---
 

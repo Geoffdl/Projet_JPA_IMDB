@@ -6,40 +6,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Genres")
-public class Genre
-{
+@Table(name = "langues")
+public class Langue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "genre_id", length = 11)
-    private Long genreId;
+    @Column(name = "langue_id", length = 11)
+    private Long langueId;
 
     @Column(name = "nom", length = 50)
     private String nom;
 
     @ManyToMany
-    @JoinTable(name = "Films_Genres",
+    @JoinTable(name = "Films_Langues",
             inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
-            joinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "genre_id"))
+            joinColumns = @JoinColumn(name = "langue_id", referencedColumnName = "langue_id"))
     private List<Film> films = new ArrayList<>();
 
-
-    public Genre()
-    {
+    public Langue() {
     }
 
     /**
-     * Gets genreId for the class Genre
+     * Gets langueId for the class Langue
      *
-     * @return value of genreId
+     * @return value of langueId
      */
-    public Long getGenreId() {
-        return genreId;
+    public Long getLangueId() {
+        return langueId;
     }
 
 
     /**
-     * Gets nom for the class Genre
+     * Gets nom for the class Langue
      *
      * @return value of nom
      */
@@ -48,7 +45,7 @@ public class Genre
     }
 
     /**
-     * Sets nom for the class Genre.
+     * Sets nom for the class Langue.
      *
      * @param nom value of nom
      */
@@ -57,7 +54,7 @@ public class Genre
     }
 
     /**
-     * Gets films for the class Genre
+     * Gets films for the class Langue
      *
      * @return value of films
      */
@@ -66,7 +63,7 @@ public class Genre
     }
 
     /**
-     * Sets films for the class Genre.
+     * Sets films for the class Langue.
      *
      * @param films value of films
      */
