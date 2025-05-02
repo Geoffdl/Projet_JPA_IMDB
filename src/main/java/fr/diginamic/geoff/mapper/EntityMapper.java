@@ -1,6 +1,17 @@
 package fr.diginamic.geoff.mapper;
 
+/**
+ * Interface containing methods handling DTO and Entity conversions
+ * @param <D> the source class
+ * @param <E> the target class
+ */
 public interface EntityMapper<D, E> {
 
-    E mapToEntity(D dto);
+    /**
+     * Method that takes in a DTO an converts it to an Entity
+     * @param dto takes a DTO object as parameter
+     * @return returns an Entity object with non-relationship based attributes set
+     * @throws Exception
+     */
+    E mapToEntity(D dto) throws Exception;
 }

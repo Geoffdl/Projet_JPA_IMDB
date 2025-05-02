@@ -1,4 +1,4 @@
-package fr.diginamic.geoff.deserializer;
+package fr.diginamic.geoff.dto.deserializer;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;

@@ -11,9 +11,7 @@ import java.util.List;
  * Utility focused class that handles jackson implementation and creates an object mapper.
  */
 public class JsonParser {
-    /**
-     * Singleton instance of ObjectMapper
-     */
+
     private final ObjectMapper mapper = new ObjectMapper();
 
     /**

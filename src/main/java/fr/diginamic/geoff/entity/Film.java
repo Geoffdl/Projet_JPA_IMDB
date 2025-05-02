@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Films")
-public class Film
-{
+public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id", length = 11)
@@ -35,10 +35,10 @@ public class Film
     private Pays pays;
 
     @OneToMany(mappedBy = "film")
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     @ManyToMany(mappedBy = "films")
-    private List<Langue> langues =new ArrayList<>();
+    private List<Langue> langues = new ArrayList<>();
     @ManyToMany(mappedBy = "films")
     private List<Genre> genres = new ArrayList<>();
     @ManyToMany(mappedBy = "films")
@@ -47,8 +47,7 @@ public class Film
     private List<Acteur> acteurs = new ArrayList<>();
 
 
-    public Film()
-    {
+    public Film() {
     }
 
     /**
@@ -275,4 +274,18 @@ public class Film
     public void setActeurs(List<Acteur> acteurs) {
         this.acteurs = acteurs;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Film film = (Film) o;
+        return Objects.equals(filmId, film.filmId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(filmId);
+    }
+
 }

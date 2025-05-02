@@ -18,7 +18,7 @@ public class Lieu
     @Column(name = "libelle", length = 255)
     private String libelle;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pays_id")
     private Pays pays;
 
@@ -33,15 +33,6 @@ public class Lieu
      */
     public Long getLieuId() {
         return lieuId;
-    }
-
-    /**
-     * Sets lieuId for the class Lieu.
-     *
-     * @param lieuId value of lieuId
-     */
-    public void setLieuId(Long lieuId) {
-        this.lieuId = lieuId;
     }
 
     /**

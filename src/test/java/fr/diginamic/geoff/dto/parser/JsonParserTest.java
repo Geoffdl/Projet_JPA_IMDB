@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static fr.diginamic.geoff.Main.JSONURL;
+import static fr.diginamic.geoff.App.JSONURL;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonParserTest {
