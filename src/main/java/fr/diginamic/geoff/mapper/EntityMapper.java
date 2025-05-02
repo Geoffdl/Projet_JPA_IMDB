@@ -1,6 +1,6 @@
 package fr.diginamic.geoff.mapper;
 
-public interface EntityMapper {
+public interface EntityMapper<D, E> {
 
-    void map();
+    E mapToEntity(D dto);
 }
