@@ -15,9 +15,9 @@ public class Film {
     @Column(name = "film_id", length = 11)
     private Long filmId;
 
-    @Column(name = "id_imdb", length = 9)
+    @Column(name = "id_imdb", length = 12)
     private String imdbId;
-    @Column(name = "titre", length = 50)
+    @Column(name = "titre", length = 255)
     private String titre;
     @Column(name = "annee")
     private Year annee;
@@ -288,4 +288,23 @@ public class Film {
         return Objects.hash(filmId);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Film{");
+        sb.append("filmId=").append(filmId);
+        sb.append(", imdbId='").append(imdbId).append('\'');
+        sb.append(", titre='").append(titre).append('\'');
+        sb.append(", annee=").append(annee);
+        sb.append(", rating=").append(rating);
+        sb.append(", resume='").append(resume).append('\'');
+        sb.append(", lieuTournage=").append(lieuTournage);
+        sb.append(", pays=").append(pays);
+        sb.append(", roles=").append(roles);
+        sb.append(", langues=").append(langues);
+        sb.append(", genres=").append(genres);
+        sb.append(", realisateurs=").append(realisateurs);
+        sb.append(", acteurs=").append(acteurs);
+        sb.append('}');
+        return sb.toString();
+    }
 }

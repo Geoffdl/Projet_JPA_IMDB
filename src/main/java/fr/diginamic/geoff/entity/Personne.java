@@ -14,7 +14,7 @@ public abstract class Personne
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personneId;
 
-    @Column(name = "id_imdb", length = 9)
+    @Column(name = "id_imdb", length = 12)
     private String imdbId;
 
     @Column(name = "nom", length = 50)

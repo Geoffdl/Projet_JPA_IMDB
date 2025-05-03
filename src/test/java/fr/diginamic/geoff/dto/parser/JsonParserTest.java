@@ -1,6 +1,7 @@
 package fr.diginamic.geoff.dto.parser;
 
 import fr.diginamic.geoff.dto.FilmDTO;
+import fr.diginamic.geoff.parser.JsonParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

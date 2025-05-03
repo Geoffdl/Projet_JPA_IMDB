@@ -19,8 +19,7 @@ public class Pays
     @Column(name = "url", length = 255)
     private String url;
 
-    @OneToMany
-    @JoinColumn(name = "film_id")
+    @OneToMany(mappedBy = "pays")
     private List<Film> films;
 
     public Pays()

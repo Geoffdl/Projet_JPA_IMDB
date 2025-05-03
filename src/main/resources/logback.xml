@@ -1,0 +1,16 @@
+<configuration>
+    <!-- ... your existing appenders and root logger ... -->
+
+    <!-- Suppress Hibernate logs -->
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.SQL" level="WARN"/>
+    <logger name="org.hibernate.type" level="WARN"/>
+    <logger name="org.hibernate.stat" level="WARN"/>
+    <logger name="org.hibernate.tool.hbm2ddl" level="WARN"/>
+
+    <!-- Suppress MariaDB JDBC logs -->
+    <logger name="org.mariadb" level="WARN"/>
+    <logger name="org.mariadb.jdbc" level="WARN"/>
+
+    <!-- ... rest of your config ... -->
+</configuration>

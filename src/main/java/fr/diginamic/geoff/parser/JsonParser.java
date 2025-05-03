@@ -1,4 +1,4 @@
-package fr.diginamic.geoff.dto.parser;
+package fr.diginamic.geoff.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
