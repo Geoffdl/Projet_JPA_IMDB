@@ -7,9 +7,10 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class FilmDTOUtilsTest {
+class FilmUtilsTest {
 
     List<FilmDTO> films = new ArrayList<>();
     FilmDTO a = new FilmDTO();
@@ -24,7 +25,7 @@ class FilmDTOUtilsTest {
         films.add(a);
         films.add(b);
 
-        List<FilmDTO> listWODuplicates = FilmDTOUtils.removeDuplicateByTitle(films);
+        List<FilmDTO> listWODuplicates = FilmUtils.removeDuplicateByTitle(films);
 
         assertEquals(1, listWODuplicates.size());
         assertNotEquals(films.getFirst().getAnneeSortie(), Year.of(1977));

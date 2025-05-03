@@ -10,11 +10,8 @@ public class ActeurMapper implements EntityMapper<ActeurDTO, Acteur> {
     public Acteur mapToEntity(ActeurDTO dto) {
 
         Acteur acteur = new Acteur();
-        acteur.setTaille(StringUtils.stringToFloat(dto.getHeight()));
-
-        String[] identite = StringUtils.stringToArrayOfStrings(dto.getIdentite(), " ");
-        acteur.setNom(identite[0]);
-        acteur.setPrenom(identite[1]);
+        setIdentity(dto, acteur);
+        setTaille(dto, acteur);
         acteur.setDateNaissance(dto.getNaissance().getDateNaissance());
         acteur.setImdbId(dto.getId());
         acteur.setUrl(dto.getUrl());
@@ -22,4 +19,12 @@ public class ActeurMapper implements EntityMapper<ActeurDTO, Acteur> {
         return acteur;
     }
 
+    private void setIdentity(ActeurDTO acteurDTO, Acteur acteur){
+        String[] identite = StringUtils.stringToArrayOfStrings(acteurDTO.getIdentite(), " ");
+        acteur.setNom(identite[0]);
+        acteur.setPrenom(identite[1]);
+    }
+    private void setTaille(ActeurDTO acteurDTO, Acteur acteur){
+        acteur.setTaille(StringUtils.stringToFloat(acteurDTO.getHeight()));
+    }
 }

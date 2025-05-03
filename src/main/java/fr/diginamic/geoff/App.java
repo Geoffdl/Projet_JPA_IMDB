@@ -1,16 +1,15 @@
 package fr.diginamic.geoff;
 
 import fr.diginamic.geoff.dto.FilmDTO;
-import fr.diginamic.geoff.parser.JsonParser;
 import fr.diginamic.geoff.entity.Film;
 import fr.diginamic.geoff.mapper.EntityMapper;
 import fr.diginamic.geoff.mapper.FilmMapper;
-import fr.diginamic.geoff.utils.FilmDTOUtils;
+import fr.diginamic.geoff.parser.JsonParser;
+import fr.diginamic.geoff.utils.FilmUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +35,7 @@ public class App {
 
             EntityMapper<FilmDTO, Film> filmMapper = new FilmMapper();
 
-            List<FilmDTO> filmsWoDuplicates = FilmDTOUtils.removeDuplicateByTitle(films);
+            List<FilmDTO> filmsWoDuplicates = FilmUtils.removeDuplicateByTitle(films);
 
 
             AtomicInteger line = new AtomicInteger();

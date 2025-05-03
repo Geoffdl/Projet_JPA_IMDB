@@ -8,6 +8,7 @@ package fr.diginamic.geoff.dto;
  */
 public class ActeurDTO extends PersonneDTO
 {
+
     private String height;
 
     public ActeurDTO() {

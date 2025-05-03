@@ -36,14 +36,6 @@ public class Role
         return roleId;
     }
 
-    /**
-     * Sets roleId for the class Role.
-     *
-     * @param roleId value of roleId
-     */
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
 
     /**
      * Gets acteur for the class Role

@@ -6,13 +6,13 @@ package fr.diginamic.geoff.dto;
  * Data Transfer Object for JSON to POJO conversion of pays
  *
  */
-public class PaysDto
+public class PaysDTO
 {
     private String nom;
     private String url;
 
 
-    public PaysDto()
+    public PaysDTO()
     {
     }
 

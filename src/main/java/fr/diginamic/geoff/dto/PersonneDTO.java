@@ -8,6 +8,7 @@ package fr.diginamic.geoff.dto;
  */
 public class PersonneDTO
 {
+    @NaturalId
     private String id;
     private String identite;
     private String url;

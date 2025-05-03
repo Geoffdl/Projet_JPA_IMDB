@@ -12,6 +12,7 @@ public class LieuTournageMapper implements EntityMapper<LieuTournageDTO, Lieu> {
 
         lieu.setRegion(dto.getEtatDept());
         lieu.setVille(dto.getVille());
+//        lieu.setLibelle();
 
         return null;
     }

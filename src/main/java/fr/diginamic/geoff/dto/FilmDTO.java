@@ -17,7 +17,7 @@ import java.util.List;
 public class FilmDTO
 {
     private String id;
-    private PaysDto pays;
+    private PaysDTO pays;
     private String nom;
     private String url;
 
@@ -72,7 +72,7 @@ public class FilmDTO
      *
      * @return value of pays
      */
-    public PaysDto getPays() {
+    public PaysDTO getPays() {
         return pays;
     }
 
@@ -81,7 +81,7 @@ public class FilmDTO
      *
      * @param pays value of pays
      */
-    public void setPays(PaysDto pays) {
+    public void setPays(PaysDTO pays) {
         this.pays = pays;
     }
 
