@@ -1,0 +1,24 @@
+package fr.diginamic.geoff.service;
+
+import fr.diginamic.geoff.dto.FilmDTO;
+
+import java.util.List;
+
+public interface EntityService<T, D> {
+
+    /**
+     * This generic method handles the conversion of DTO to Entity.
+     * @param filmDTOList list of raw DTO
+     * @return listOf Realisateurs
+     */
+    List<T> createEntityList(List<FilmDTO> filmDTOList);
+
+    /**
+     * This methods parses through the DTO list and removes duplicates
+     * @param filmDTOList
+     * @return list of specific DTO before entity conversion
+     */
+     List<D> getList(List<FilmDTO> filmDTOList);
+
+
+}

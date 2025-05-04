@@ -19,10 +19,17 @@ public class PersonneMapper implements EntityMapper<PersonneDTO, Realisateur> {
         return realisateur;
     }
 
+    //TODO null handling and diff length cases
     private void setIdentity(PersonneDTO realisateurDTO, Realisateur realisateur) {
         String[] identite = StringUtils.stringToArrayOfStrings(realisateurDTO.getIdentite(), " ");
-        realisateur.setNom(identite[0]);
-        realisateur.setPrenom(identite[1]);
+        if(identite.length >=2){
+
+            realisateur.setNom(identite[0]);
+            realisateur.setPrenom(identite[1]);
+        } else{
+            realisateur.setNom("");
+            realisateur.setPrenom("");
+        }
     }
 
 

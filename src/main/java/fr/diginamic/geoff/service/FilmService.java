@@ -8,25 +8,22 @@ import fr.diginamic.geoff.utils.DTOUtils;
 
 import java.util.List;
 
-public class FilmService {
+public class FilmService implements EntityService<Film, Film> {
 
     EntityMapper<FilmDTO, Film> filmMapper = new FilmMapper();
 
-    /**
-     * Take a list of FilmDTOs and returns a List of simple films without duplicates
-     *
-     * @param filmDTOS list of raw DTO
-     * @return listOf films
-     */
-    public List<Film> createEntities(List<FilmDTO> filmDTOS) {
+    @Override
+    public List<Film> createEntityList(List<FilmDTO> filmDTOList) {
+        filmDTOList = DTOUtils.removeDuplicatesByNaturalId(filmDTOList); //remove duplicates
 
-
-        filmDTOS = DTOUtils.removeDuplicatesByNaturalId(filmDTOS); //remove duplicates
-
-        List<Film> filmList = filmDTOS.stream().map(p -> filmMapper.mapToEntity(p)).toList(); // map to simple entity
+        List<Film> filmList = filmDTOList.stream().map(p -> filmMapper.mapToEntity(p)).toList(); // map to simple entity
 
         return filmList;
     }
 
-
+    //not needed in this case
+    @Override
+    public List<Film> getList(List<FilmDTO> filmDTOList) {
+        return List.of();
+    }
 }

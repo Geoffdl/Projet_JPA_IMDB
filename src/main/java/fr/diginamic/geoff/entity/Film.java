@@ -23,7 +23,7 @@ public class Film {
     private Year annee;
     @Column(name = "rating")
     private Float rating;
-    @Column(name = "resume", length = 255)
+    @Column(name = "resume", length = 510)
     private String resume;
 
 

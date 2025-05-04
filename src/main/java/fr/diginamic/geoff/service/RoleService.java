@@ -9,18 +9,12 @@ import fr.diginamic.geoff.utils.DTOUtils;
 
 import java.util.List;
 
-public class RoleService {
+public class RoleService implements EntityService<Role, RoleDTO> {
     EntityMapper<RoleDTO, Role> roleMapper = new RoleMapper();
 
-    /**
-     * Take a list of roleDTOS and returns a List of simple Roles without duplicates
-     *
-     * @param filmDTOS list of raw DTO
-     * @return listOf Roles
-     */
-    public List<Role> createEntities(List<FilmDTO> filmDTOS) {
-
-        List<RoleDTO> rolesDTOList = getList(filmDTOS);
+    @Override
+    public List<Role> createEntityList(List<FilmDTO> filmDTOList) {
+        List<RoleDTO> rolesDTOList = getList(filmDTOList);
 
         rolesDTOList = DTOUtils.removeDuplicatesByNaturalId(rolesDTOList); //remove duplicates
 
@@ -29,13 +23,11 @@ public class RoleService {
         return realisateurList;
     }
 
-    /**
-     * Generates a list of all roles across all films;
-     *
-     * @param filmDTOS raw list of film dtos
-     * @return list of roles
-     */
-    private List<RoleDTO> getList(List<FilmDTO> filmDTOS) {
-        return filmDTOS.stream().flatMap(d -> d.getRole().stream()).toList();
+    //TODO Null handling
+    @Override
+    public List<RoleDTO> getList(List<FilmDTO> filmDTOList) {
+
+        return filmDTOList.stream().flatMap(d -> d.getRole().stream()).toList();
     }
+
 }

@@ -19,12 +19,20 @@ public class ActeurMapper implements EntityMapper<ActeurDTO, Acteur> {
         return acteur;
     }
 
-    private void setIdentity(ActeurDTO acteurDTO, Acteur acteur){
-        String[] identite = StringUtils.stringToArrayOfStrings(acteurDTO.getIdentite(), " ");
-        acteur.setNom(identite[0]);
-        acteur.setPrenom(identite[1]);
+    private void setIdentity(ActeurDTO acteurDTO, Acteur acteur) {
+        //TODO null handling and diff length cases
+        String[] identite = new String[2];
+        identite = StringUtils.stringToArrayOfStrings(acteurDTO.getIdentite(), " ");
+        if (identite.length >= 2) {
+            acteur.setNom(identite[0]);
+            acteur.setPrenom(identite[1]);
+        } else{
+            acteur.setPrenom("");
+            acteur.setNom("");
+        }
     }
-    private void setTaille(ActeurDTO acteurDTO, Acteur acteur){
+
+    private void setTaille(ActeurDTO acteurDTO, Acteur acteur) {
         acteur.setTaille(StringUtils.stringToFloat(acteurDTO.getTaille()));
     }
 }

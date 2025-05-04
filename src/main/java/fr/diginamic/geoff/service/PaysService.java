@@ -9,18 +9,12 @@ import fr.diginamic.geoff.utils.DTOUtils;
 
 import java.util.List;
 
-public class PaysService {
+public class PaysService implements EntityService<Pays, PaysDTO> {
     EntityMapper<PaysDTO, Pays> roleMapper = new PaysMapper();
 
-    /**
-     * Take a list of roleDTOS and returns a List of simple Pays without duplicates
-     *
-     * @param filmDTOS list of raw DTO
-     * @return listOf Pays
-     */
-    public List<Pays> createEntities(List<FilmDTO> filmDTOS) {
-
-        List<PaysDTO> paysDTOList = getList(filmDTOS);
+    @Override
+    public List<Pays> createEntityList(List<FilmDTO> filmDTOList) {
+        List<PaysDTO> paysDTOList = getList(filmDTOList);
 
         paysDTOList = DTOUtils.removeDuplicatesByNaturalId(paysDTOList); //remove duplicates
 
@@ -29,13 +23,12 @@ public class PaysService {
         return paysList;
     }
 
-    /**
-     * Generates a list of all roles across all films;
-     *
-     * @param filmDTOS raw list of film dtos
-     * @return list of roles
-     */
-    private List<PaysDTO> getList(List<FilmDTO> filmDTOS) {
-        return filmDTOS.stream().map(p -> p.getPays()).toList();
+    //TODO Null handling
+    @Override
+    public List<PaysDTO> getList(List<FilmDTO> filmDTOList) {
+        return filmDTOList.stream().map(p -> p.getPays()).toList();
+
     }
+
+
 }

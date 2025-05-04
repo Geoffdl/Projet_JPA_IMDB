@@ -9,19 +9,13 @@ import fr.diginamic.geoff.utils.DTOUtils;
 
 import java.util.List;
 
-public class RealisateurService {
+public class RealisateurService implements EntityService<Realisateur, PersonneDTO> {
 
     EntityMapper<PersonneDTO, Realisateur> personneMapper = new PersonneMapper();
 
-    /**
-     * Take a list of FilmDTOs and returns a List of simple Realisateurs without duplicates
-     *
-     * @param filmDTOS list of raw DTO
-     * @return listOf Realisateurs
-     */
-    public List<Realisateur> createEntities(List<FilmDTO> filmDTOS) {
-
-        List<PersonneDTO> personneDTOList = getList(filmDTOS);
+    @Override
+    public List<Realisateur> createEntityList(List<FilmDTO> filmDTOList) {
+                List<PersonneDTO> personneDTOList = getList(filmDTOList);
 
         personneDTOList = DTOUtils.removeDuplicatesByNaturalId(personneDTOList); //remove duplicates
 
@@ -30,13 +24,9 @@ public class RealisateurService {
         return realisateurList;
     }
 
-    /**
-     * Generates a list of all realisateurs across all films;
-     *
-     * @param filmDTOS raw list of film dtos
-     * @return list of realisateurs
-     */
-    private List<PersonneDTO> getList(List<FilmDTO> filmDTOS) {
-        return filmDTOS.stream().flatMap(d -> d.getRealisateurs().stream()).toList();
+    @Override
+    public List<PersonneDTO> getList(List<FilmDTO> filmDTOList) {
+        return filmDTOList.stream().flatMap(d -> d.getRealisateurs().stream()).toList();
     }
+    
 }

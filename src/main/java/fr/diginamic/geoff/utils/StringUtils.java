@@ -7,9 +7,9 @@ public class StringUtils {
 
     public static String[] stringToArrayOfStrings(String string, String splitTarget) {
         if (string == null || string.isEmpty()) return null;
-        try{
+        try {
             return string.split(splitTarget);
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
 

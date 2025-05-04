@@ -1,21 +1,8 @@
 package fr.diginamic.geoff;
 
-import fr.diginamic.geoff.dto.FilmDTO;
-import fr.diginamic.geoff.entity.Film;
-import fr.diginamic.geoff.mapper.EntityMapper;
-import fr.diginamic.geoff.mapper.FilmMapper;
-import fr.diginamic.geoff.parser.JsonParser;
-import fr.diginamic.geoff.utils.DTOUtils;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import fr.diginamic.geoff.service.BaseEntityCreationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class App {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
@@ -24,11 +11,12 @@ public class App {
     public static void main(String[] args) {
 
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("imdb");
-//        EntityManager em = emf.createEntityManager();
-//        EntityTransaction transaction = em.getTransaction();
+        BaseEntityCreationService creationService = new BaseEntityCreationService();
+        creationService.generateBaseEntityObjects();
 
 
+
+    /*
         try {
             JsonParser parser = new JsonParser();
             List<FilmDTO> films = parser.tryReading(FilmDTO.class, JSONURL);
@@ -63,6 +51,6 @@ public class App {
 
         }
 
-
+*/
     }
 }
