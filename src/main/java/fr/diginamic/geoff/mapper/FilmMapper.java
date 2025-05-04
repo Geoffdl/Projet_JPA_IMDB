@@ -26,11 +26,11 @@ public class FilmMapper implements EntityMapper<FilmDTO, Film> {
 //TODO proper null and error handling
 
     private String mapAttributeImdbId(FilmDTO dto)  {
-        if(dto.getId() == null){
+        if(dto.getImdbId() == null){
             LOGGER.warn("Missing Imdb Id for film: {}", "x");
             return null;
         }
-        return dto.getId();
+        return dto.getImdbId();
     }
     private String mapAttributeTitre(FilmDTO dto) {
         if(dto.getNom() == null){

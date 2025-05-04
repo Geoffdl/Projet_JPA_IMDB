@@ -1,22 +1,25 @@
 package fr.diginamic.geoff.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.diginamic.geoff.dto.deserializer.FloatDeserializer;
 import fr.diginamic.geoff.dto.deserializer.YearDeserializer;
 
 import java.time.Year;
 import java.util.List;
+
 /**
  * @author Geoff
- *
+ * <p>
  * Data Transfer Object for JSON to POJO conversion of films
- *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FilmDTO
-{
-    private String id;
+public class FilmDTO implements NaturalIdentifiable {
+
+    @JsonProperty("id")
+    private String imdbId;
+
     private PaysDTO pays;
     private String nom;
     private String url;
@@ -45,8 +48,7 @@ public class FilmDTO
     /**
      * No arg constructor
      */
-    public FilmDTO()
-    {
+    public FilmDTO() {
     }
 
     /**
@@ -54,17 +56,17 @@ public class FilmDTO
      *
      * @return value of id
      */
-    public String getId() {
-        return id;
+    public String getImdbId() {
+        return imdbId;
     }
 
     /**
      * Sets id for the class FilmDTO.
      *
-     * @param id value of id
+     * @param imdbId value of id
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     /**
@@ -286,7 +288,7 @@ public class FilmDTO
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FilmDTO{");
-        sb.append("id='").append(id).append('\'');
+        sb.append("id='").append(imdbId).append('\'');
         sb.append(", pays=").append(pays);
         sb.append(", nom='").append(nom).append('\'');
         sb.append(", url='").append(url).append('\'');
@@ -301,5 +303,10 @@ public class FilmDTO
         sb.append(", genres=").append(genres);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public String getNaturalId() {
+        return imdbId;
     }
 }

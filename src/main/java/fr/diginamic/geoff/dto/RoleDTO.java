@@ -1,19 +1,19 @@
 package fr.diginamic.geoff.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author Geoff
- *
+ * <p>
  * Data Transfer Object for JSON to POJO conversion of roles
- *
  */
-public class RoleDTO
-{
-    private String characterName;
+public class RoleDTO implements NaturalIdentifiable{
+    @JsonProperty("characterName")
+    private String personnage;
+
     private ActeurDTO acteur;
 
-
-    public RoleDTO()
-    {
+    public RoleDTO() {
     }
 
     /**
@@ -21,17 +21,17 @@ public class RoleDTO
      *
      * @return value of characterName
      */
-    public String getCharacterName() {
-        return characterName;
+    public String getPersonnage() {
+        return personnage;
     }
 
     /**
      * Sets characterName for the class RoleDTO.
      *
-     * @param characterName value of characterName
+     * @param personnage value of characterName
      */
-    public void setCharacterName(String characterName) {
-        this.characterName = characterName;
+    public void setPersonnage(String personnage) {
+        this.personnage = personnage;
     }
 
     /**
@@ -55,9 +55,14 @@ public class RoleDTO
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("RoleDTO{");
-        sb.append("characterName='").append(characterName).append('\'');
+        sb.append("characterName='").append(personnage).append('\'');
         sb.append(", acteur=").append(acteur);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public String getNaturalId() {
+        return personnage;
     }
 }

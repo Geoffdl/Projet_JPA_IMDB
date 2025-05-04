@@ -9,7 +9,7 @@ public class RoleMapper implements EntityMapper<RoleDTO, Role> {
 
         Role role = new Role();
 
-        role.setPersonnage(dto.getCharacterName());
+        role.setPersonnage(dto.getPersonnage());
 
         return role;
     }

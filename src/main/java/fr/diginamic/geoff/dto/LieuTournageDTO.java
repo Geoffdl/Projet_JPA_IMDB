@@ -2,18 +2,15 @@ package fr.diginamic.geoff.dto;
 
 /**
  * @author Geoff
- *
+ * <p>
  * Data Transfer Object for JSON to POJO conversion of lieux de tournage
- *
  */
-public class LieuTournageDTO
-{
+public class LieuTournageDTO implements NaturalIdentifiable {
     private String ville;
     private String etatDept;
     private String pays;
 
-    public LieuTournageDTO()
-    {
+    public LieuTournageDTO() {
     }
 
     /**
@@ -77,6 +74,12 @@ public class LieuTournageDTO
         sb.append(", etatDept='").append(etatDept).append('\'');
         sb.append(", pays='").append(pays).append('\'');
         sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
+    public String getNaturalId() {
+        StringBuilder sb = new StringBuilder().append(ville).append(",").append(etatDept);
         return sb.toString();
     }
 }

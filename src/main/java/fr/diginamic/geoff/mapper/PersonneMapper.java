@@ -13,7 +13,7 @@ public class PersonneMapper implements EntityMapper<PersonneDTO, Realisateur> {
         setIdentity(dto, realisateur);
 
         realisateur.setDateNaissance(dto.getNaissance().getDateNaissance());
-        realisateur.setImdbId(dto.getId());
+        realisateur.setImdbId(dto.getImdbId());
         realisateur.setUrl(dto.getUrl());
 
         return realisateur;

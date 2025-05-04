@@ -5,7 +5,7 @@ import fr.diginamic.geoff.entity.Film;
 import fr.diginamic.geoff.mapper.EntityMapper;
 import fr.diginamic.geoff.mapper.FilmMapper;
 import fr.diginamic.geoff.parser.JsonParser;
-import fr.diginamic.geoff.utils.FilmUtils;
+import fr.diginamic.geoff.utils.DTOUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -35,7 +35,7 @@ public class App {
 
             EntityMapper<FilmDTO, Film> filmMapper = new FilmMapper();
 
-            List<FilmDTO> filmsWoDuplicates = FilmUtils.removeDuplicateByTitle(films);
+            List<FilmDTO> filmsWoDuplicates = DTOUtils.removeDuplicatesByNaturalId(films);
 
 
             AtomicInteger line = new AtomicInteger();

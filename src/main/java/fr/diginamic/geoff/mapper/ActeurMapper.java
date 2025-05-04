@@ -13,7 +13,7 @@ public class ActeurMapper implements EntityMapper<ActeurDTO, Acteur> {
         setIdentity(dto, acteur);
         setTaille(dto, acteur);
         acteur.setDateNaissance(dto.getNaissance().getDateNaissance());
-        acteur.setImdbId(dto.getId());
+        acteur.setImdbId(dto.getImdbId());
         acteur.setUrl(dto.getUrl());
 
         return acteur;
@@ -25,6 +25,6 @@ public class ActeurMapper implements EntityMapper<ActeurDTO, Acteur> {
         acteur.setPrenom(identite[1]);
     }
     private void setTaille(ActeurDTO acteurDTO, Acteur acteur){
-        acteur.setTaille(StringUtils.stringToFloat(acteurDTO.getHeight()));
+        acteur.setTaille(StringUtils.stringToFloat(acteurDTO.getTaille()));
     }
 }

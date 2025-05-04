@@ -8,7 +8,7 @@ package fr.diginamic.geoff.mapper;
 public interface EntityMapper<D, E> {
 
     /**
-     * Method that takes in a DTO an converts it to an Entity
+     * Method that takes in a DTO an converts it into an Entity
      * @param dto takes a DTO object as parameter
      * @return returns an Entity object with non-relationship based attributes set
      *
