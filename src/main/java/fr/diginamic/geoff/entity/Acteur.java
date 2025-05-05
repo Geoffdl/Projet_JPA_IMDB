@@ -78,4 +78,6 @@ public class Acteur extends Personne
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+
 }

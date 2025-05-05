@@ -43,9 +43,9 @@ public class BaseEntityCreationService {
         try {
 //            persistActeurs(baseDtoList);
 //            persistFilms(baseDtoList);
-            persistGenres(baseDtoList);
+//            persistGenres(baseDtoList);
 //            persistLangues(baseDtoList);
-//            persistLieux(baseDtoList);
+            persistLieux(baseDtoList);
 //            persistRealisateurs(baseDtoList);
 //            persistRoles(baseDtoList);
 //            persistPays(baseDtoList);

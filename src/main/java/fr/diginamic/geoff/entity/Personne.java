@@ -3,6 +3,7 @@ package fr.diginamic.geoff.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -17,11 +18,14 @@ public abstract class Personne
     @Column(name = "id_imdb", length = 12)
     private String imdbId;
 
-    @Column(name = "nom", length = 50)
-    private String nom;
+    @Column(name = "identite", length = 100)
+    private String identite;
 
-    @Column(name = "prenom", length = 50)
-    private String prenom;
+//    @Column(name = "nom", length = 50)
+//    private String nom;
+//
+//    @Column(name = "prenom", length = 50)
+//    private String prenom;
 
     @Column(name = "dateNaissance")
     private LocalDate dateNaissance;
@@ -65,41 +69,41 @@ public abstract class Personne
         this.imdbId = imdbId;
     }
 
-    /**
-     * Gets nom for the class Personne
-     *
-     * @return value of nom
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * Sets nom for the class Personne.
-     *
-     * @param nom value of nom
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    /**
-     * Gets prenom for the class Personne
-     *
-     * @return value of prenom
-     */
-    public String getPrenom() {
-        return prenom;
-    }
-
-    /**
-     * Sets prenom for the class Personne.
-     *
-     * @param prenom value of prenom
-     */
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+//    /**
+//     * Gets nom for the class Personne
+//     *
+//     * @return value of nom
+//     */
+//    public String getNom() {
+//        return nom;
+//    }
+//
+//    /**
+//     * Sets nom for the class Personne.
+//     *
+//     * @param nom value of nom
+//     */
+//    public void setNom(String nom) {
+//        this.nom = nom;
+//    }
+//
+//    /**
+//     * Gets prenom for the class Personne
+//     *
+//     * @return value of prenom
+//     */
+//    public String getPrenom() {
+//        return prenom;
+//    }
+//
+//    /**
+//     * Sets prenom for the class Personne.
+//     *
+//     * @param prenom value of prenom
+//     */
+//    public void setPrenom(String prenom) {
+//        this.prenom = prenom;
+//    }
 
     /**
      * Gets dateNaissance for the class Personne
@@ -153,5 +157,34 @@ public abstract class Personne
      */
     public void setLieuxNaissance(Lieu lieuxNaissance) {
         this.lieuxNaissance = lieuxNaissance;
+    }
+
+    /**
+     * Gets identite for the class Personne
+     *
+     * @return value of identite
+     */
+    public String getIdentite() {
+        return identite;
+    }
+
+    /**
+     * Sets identite for the class Personne.
+     *
+     * @param identite value of identite
+     */
+    public void setIdentite(String identite) {
+        this.identite = identite;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Personne personne)) return false;
+        return Objects.equals(imdbId, personne.imdbId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(imdbId);
     }
 }

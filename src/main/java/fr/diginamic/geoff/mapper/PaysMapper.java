@@ -4,7 +4,7 @@ import fr.diginamic.geoff.dto.LieuTournageDTO;
 import fr.diginamic.geoff.dto.NaissanceDTO;
 import fr.diginamic.geoff.dto.PaysDTO;
 import fr.diginamic.geoff.entity.Pays;
-import fr.diginamic.geoff.utils.DTOUtils;
+import fr.diginamic.geoff.utils.PaysUtils;
 
 public class PaysMapper implements EntityMapper<PaysDTO, Pays> {
     @Override
@@ -24,7 +24,7 @@ public class PaysMapper implements EntityMapper<PaysDTO, Pays> {
             return null;
         }
         PaysDTO paysDTO = new PaysDTO();
-        String paysNaissance = DTOUtils.extractPaysFromLieuNaissance(dto.getLieuNaissance());
+        String paysNaissance = PaysUtils.extractPaysFromLieuNaissance(dto.getLieuNaissance());
 
         paysDTO.setNom(paysNaissance);
 

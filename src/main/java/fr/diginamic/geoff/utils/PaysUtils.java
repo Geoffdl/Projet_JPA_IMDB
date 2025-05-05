@@ -3,6 +3,11 @@ package fr.diginamic.geoff.utils;
 public class PaysUtils {
 
 
+    /**
+     * Splits lieu de naissance and extract the country from it
+     * @param lieuNaissance raw lieu string
+     * @return country string
+     */
     public static String extractPaysFromLieuNaissance(String lieuNaissance) {
         if (lieuNaissance == null) {
             return null;
@@ -14,12 +19,12 @@ public class PaysUtils {
 
 
     /**
-     * Cleans up a messy country string and extracts the most likely country name.
+     * Cleans up a messy country string and extracts the most likely country name
      * @param rawCountry the raw country string
-     * @return cleaned country name, or null if input is null/blank
+     * @return cleaned country name
      */
     public static String cleanCountryName(String rawCountry) {
-        if (rawCountry == null || rawCountry.isBlank()) return null;
+        if (rawCountry == null) return null;
 
         String cleaned = rawCountry;
 

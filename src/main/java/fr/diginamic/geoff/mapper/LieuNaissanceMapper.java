@@ -2,41 +2,32 @@ package fr.diginamic.geoff.mapper;
 
 import fr.diginamic.geoff.dto.NaissanceDTO;
 import fr.diginamic.geoff.entity.Lieu;
-import fr.diginamic.geoff.utils.StringUtils;
+import fr.diginamic.geoff.utils.LieuUtils;
 
 public class LieuNaissanceMapper implements EntityMapper<NaissanceDTO, Lieu> {
 
 
     @Override
     public Lieu mapToEntity(NaissanceDTO dto) {
-        Lieu lieuNaissance = new Lieu();
+        Lieu lieu = new Lieu();
 
-        // TODO implement proper handling depending on the data received typical : "city", "region", "country" // can also be "city", "country"
-        splitLieuIntoArrayOfString result = getSplitLieuIntoArrayOfString(dto);
+        lieu.setVille(extractLieuVille(dto));
+        lieu.setRegion(extractLieuRegion(dto));
+        lieu.setLibelle(extractLibelle(dto));
 
-        lieuNaissance.setRegion(result.region());
-        lieuNaissance.setVille(result.ville());
-
-        return lieuNaissance;
+        return lieu;
     }
 
-    private static splitLieuIntoArrayOfString getSplitLieuIntoArrayOfString(NaissanceDTO dto) {
-        String[] adresseArray = StringUtils.stringToArrayOfStrings(dto.getLieuNaissance(), ",");
-        String region = "";
-        String ville = "";
 
-        if(adresseArray.length == 2) {
-             region = adresseArray[1];
-             ville = adresseArray[0];
-        }
-        if(adresseArray.length >2){
-            region = "";
-            ville = adresseArray[0];
-        }
-        splitLieuIntoArrayOfString result = new splitLieuIntoArrayOfString(region, ville);
-        return result;
+    //TODO Appropriate util methods to extract the corresponding data from the LieuxNaissance String in the raw data
+    private String extractLieuVille(NaissanceDTO dto){
+        return LieuUtils.extractLieuVille(dto);
+
     }
-
-    private record splitLieuIntoArrayOfString(String region, String ville) {
+    private String extractLieuRegion(NaissanceDTO dto){
+        return LieuUtils.extractLieuRegion(dto);
+    }
+    private String extractLibelle(NaissanceDTO dto){
+        return LieuUtils.extractLibelle(dto);
     }
 }

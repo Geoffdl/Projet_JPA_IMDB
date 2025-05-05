@@ -42,7 +42,7 @@ public class FilmDTO implements NaturalIdentifiable {
     @JsonDeserialize(using = YearDeserializer.class)
     private Year anneeSortie;
 
-    private List<RoleDTO> role;
+    private List<RoleDTO> roles;
     private List<String> genres;
 
     /**
@@ -254,17 +254,17 @@ public class FilmDTO implements NaturalIdentifiable {
      *
      * @return value of role
      */
-    public List<RoleDTO> getRole() {
-        return role;
+    public List<RoleDTO> getRoles() {
+        return roles;
     }
 
     /**
      * Sets role for the class FilmDTO.
      *
-     * @param role value of role
+     * @param roles value of role
      */
-    public void setRole(List<RoleDTO> role) {
-        this.role = role;
+    public void setRoles(List<RoleDTO> roles) {
+        this.roles = roles;
     }
 
     /**
@@ -299,7 +299,7 @@ public class FilmDTO implements NaturalIdentifiable {
         sb.append(", realisateurs=").append(realisateurs);
         sb.append(", castingPrincipal=").append(castingPrincipal);
         sb.append(", anneeSortie=").append(anneeSortie);
-        sb.append(", role=").append(role);
+        sb.append(", role=").append(roles);
         sb.append(", genres=").append(genres);
         sb.append('}');
         return sb.toString();

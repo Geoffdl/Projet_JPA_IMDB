@@ -19,7 +19,7 @@ public class Role
     @JoinColumn(name = "film_id", referencedColumnName = "film_id")
     private Film film;
 
-    @Column(name = "personnage", length = 50)
+    @Column(name = "personnage", length = 100)
     private String personnage;
 
 

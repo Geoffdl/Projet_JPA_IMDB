@@ -11,9 +11,9 @@ public class Lieu
     @Column(name = "lieu_id", length = 11)
     private Long lieuId;
 
-    @Column(name = "region", length = 50)
+    @Column(name = "region", length = 100)
     private String region;
-    @Column(name = "ville", length = 50)
+    @Column(name = "ville", length = 100)
     private String ville;
     @Column(name = "libelle", length = 255)
     private String libelle;
