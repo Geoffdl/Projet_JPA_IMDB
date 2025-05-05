@@ -3,9 +3,7 @@ package fr.diginamic.geoff.utils;
 import fr.diginamic.geoff.dto.NaturalIdentifiable;
 import fr.diginamic.geoff.dto.PaysDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -19,8 +17,11 @@ public class DTOUtils {
      * @return ListOfDto without duplicates by NatId
      */
     public static <T extends NaturalIdentifiable> List<T> removeDuplicatesByNaturalId(List<T> listOfDto) {
-
+        if (listOfDto == null) {
+            return Collections.emptyList();
+        }
         Map<String, T> map = listOfDto.stream()
+                .filter(Objects::nonNull)
                 .collect(Collectors.toMap(
                         NaturalIdentifiable::getNaturalId, //The implementation of NaturalIdentifiable
                         Function.identity(), //The class of the source list
