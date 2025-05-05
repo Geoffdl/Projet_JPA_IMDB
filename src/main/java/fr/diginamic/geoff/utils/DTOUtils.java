@@ -1,6 +1,7 @@
 package fr.diginamic.geoff.utils;
 
 import fr.diginamic.geoff.dto.NaturalIdentifiable;
+import fr.diginamic.geoff.dto.PaysDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +27,23 @@ public class DTOUtils {
                         (existing, replacement) -> existing)); //keep first instance
 
         return new ArrayList<>(map.values());
+    }
+
+    public static String extractPaysFromLieuNaissance(String lieuNaissance) {
+        if (lieuNaissance == null) {
+            return null;
+        }
+        String[] parts = lieuNaissance.split(",");
+
+        return parts[parts.length - 1].trim();
+    }
+
+    public static PaysDTO extractPaysFromCountryName(String countryName) {
+        if (countryName == null) {
+            return null;
+        }
+        PaysDTO paysDTO = new PaysDTO();
+        paysDTO.setNom(countryName);
+        return paysDTO;
     }
 }

@@ -2,6 +2,8 @@ package fr.diginamic.geoff.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 /**
  * @author Geoff
  * <p>
@@ -109,5 +111,17 @@ public class PersonneDTO implements NaturalIdentifiable {
     @Override
     public String getNaturalId() {
         return imdbId;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        PersonneDTO that = (PersonneDTO) object;
+        return Objects.equals(imdbId, that.imdbId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(imdbId);
     }
 }

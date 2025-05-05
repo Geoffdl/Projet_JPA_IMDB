@@ -4,14 +4,13 @@ import fr.diginamic.geoff.dto.FilmDTO;
 import fr.diginamic.geoff.entity.*;
 import fr.diginamic.geoff.parser.JsonParser;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 
 import java.io.IOException;
 import java.util.List;
 
-import static fr.diginamic.geoff.App.JSONURL;
+import static fr.diginamic.geoff.App.FILMS_JSON;
+import static fr.diginamic.geoff.App.emf;
 
 public class BaseEntityCreationService {
     JsonParser parser = new JsonParser();
@@ -25,26 +24,26 @@ public class BaseEntityCreationService {
     RealisateurService realisateurService = new RealisateurService();
     RoleService roleService = new RoleService();
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("imdb");
+
 
     public void generateBaseEntityObjects() {
 
         List<FilmDTO> baseDtoList = null;
         try {
-            baseDtoList = parser.tryReading(FilmDTO.class, JSONURL);
+            baseDtoList = parser.tryReading(FilmDTO.class, FILMS_JSON);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            persistActeurs(baseDtoList);
-            persistFilms(baseDtoList);
-            persistGenres(baseDtoList);
-            persistLangues(baseDtoList);
-            persistLieux(baseDtoList);
-            persistRealisateurs(baseDtoList);
+//            persistActeurs(baseDtoList);
+//            persistFilms(baseDtoList);
+//            persistGenres(baseDtoList);
+//            persistLangues(baseDtoList);
+//            persistLieux(baseDtoList);
+//            persistRealisateurs(baseDtoList);
 //            persistRoles(baseDtoList);
-//            persistPays(baseDtoList);
+            persistPays(baseDtoList);
         } finally {
             close();
         }

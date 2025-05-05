@@ -1,5 +1,7 @@
 package fr.diginamic.geoff.dto;
 
+import java.util.Objects;
+
 /**
  * @author Geoff
  * <p>
@@ -61,5 +63,16 @@ public class PaysDTO implements NaturalIdentifiable{
     @Override
     public String getNaturalId() {
         return nom;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof PaysDTO paysDTO)) return false;
+        return Objects.equals(nom, paysDTO.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nom);
     }
 }

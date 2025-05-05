@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.diginamic.geoff.dto.deserializer.LocalDateDeserializer;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * @author Geoff
@@ -62,5 +63,16 @@ public class NaissanceDTO {
         sb.append(", lieuNaissance='").append(lieuNaissance).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof NaissanceDTO that)) return false;
+        return Objects.equals(lieuNaissance, that.lieuNaissance);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lieuNaissance);
     }
 }

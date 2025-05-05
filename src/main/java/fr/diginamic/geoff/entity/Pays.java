@@ -3,6 +3,7 @@ package fr.diginamic.geoff.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Pays")
@@ -13,7 +14,7 @@ public class Pays
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paysId;
 
-    @Column(name = "nom", length = 50)
+    @Column(name = "nom", length = 100)
     private String nom;
 
     @Column(name = "url", length = 255)
@@ -87,5 +88,16 @@ public class Pays
      */
     public void setFilms(List<Film> films) {
         this.films = films;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Pays pays)) return false;
+        return Objects.equals(nom, pays.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nom);
     }
 }
