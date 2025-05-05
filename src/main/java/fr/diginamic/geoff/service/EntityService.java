@@ -7,7 +7,7 @@ import java.util.List;
 public interface EntityService<T, D> {
 
     /**
-     * This generic method handles the conversion of DTO to Entity.
+     * This method handles the conversion of DTO to Entity.
      * @param filmDTOList list of raw DTO
      * @return listOf Realisateurs
      */
@@ -15,7 +15,7 @@ public interface EntityService<T, D> {
 
     /**
      * This methods parses through the DTO list and removes duplicates
-     * @param filmDTOList
+     * @param filmDTOList data source
      * @return list of specific DTO before entity conversion
      */
      List<D> getList(List<FilmDTO> filmDTOList);

@@ -37,7 +37,7 @@ public class PaysMapper implements EntityMapper<PaysDTO, Pays> {
         }
 
         PaysDTO paysDTO = new PaysDTO();
-        paysDTO.setNom(dto.getPays());
+        paysDTO.setNom(dto.getPays().trim());
         return paysDTO;
     }
 

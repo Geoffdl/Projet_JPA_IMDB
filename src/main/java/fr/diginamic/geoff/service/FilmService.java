@@ -8,7 +8,7 @@ import fr.diginamic.geoff.utils.DTOUtils;
 
 import java.util.List;
 
-public class FilmService implements EntityService<Film, Film> {
+public class FilmService implements EntityService<Film, FilmDTO> {
 
     EntityMapper<FilmDTO, Film> filmMapper = new FilmMapper();
 
@@ -23,7 +23,7 @@ public class FilmService implements EntityService<Film, Film> {
 
     //not needed in this case
     @Override
-    public List<Film> getList(List<FilmDTO> filmDTOList) {
+    public List<FilmDTO> getList(List<FilmDTO> filmDTOList) {
         return List.of();
     }
 }

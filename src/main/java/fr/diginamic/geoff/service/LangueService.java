@@ -2,20 +2,21 @@ package fr.diginamic.geoff.service;
 
 import fr.diginamic.geoff.dto.FilmDTO;
 import fr.diginamic.geoff.entity.Langue;
+import fr.diginamic.geoff.mapper.LangueMapper;
 
 import java.util.List;
 
 public class LangueService implements EntityService<Langue, String> {
-
-    //TODO IMPLEMENTATION
+    LangueMapper langueMapper = new LangueMapper();
     @Override
     public List<Langue> createEntityList(List<FilmDTO> filmDTOList) {
-        return List.of();
+
+        List<String> langueList = getList(filmDTOList);
+        return langueList.stream().map(l-> langueMapper.mapToEntity(l)).distinct().toList();
     }
 
-    //TODO IMPLEMENTATION
     @Override
     public List<String> getList(List<FilmDTO> filmDTOList) {
-        return List.of();
+        return filmDTOList.stream().map(f-> f.getLangue()).toList();
     }
 }

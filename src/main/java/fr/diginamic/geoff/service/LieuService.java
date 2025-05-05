@@ -19,6 +19,8 @@ public class LieuService implements EntityService<Lieu, LieuTournageDTO> {
     public List<LieuTournageDTO> getList(List<FilmDTO> filmDTOList) {
         return List.of();
     }
+
+
     public List<String> getListLieuNaissance(List<FilmDTO> filmDTOList) {
         return List.of();
     }

@@ -64,8 +64,7 @@ public class PaysService implements EntityService<Pays, PaysDTO> {
      */
     private List<LieuTournageDTO> getListFromLieuTournage(List<FilmDTO> filmDTOList) {
 
-        List<LieuTournageDTO> lieuTournageDTOS = filmDTOList.stream().map(f -> f.getLieuTournage()).toList();
-        return lieuTournageDTOS;
+        return filmDTOList.stream().map(f -> f.getLieuTournage()).toList();
 
     }
 
@@ -96,12 +95,12 @@ public class PaysService implements EntityService<Pays, PaysDTO> {
     private List<Pays> createEntityFromPaysDTO(List<FilmDTO> filmDTOList) {
 
         List<PaysDTO> paysDTOList = getList(filmDTOList);
-        paysDTOList = DTOUtils.removeDuplicatesByNaturalId(paysDTOList); //remove duplicates
 
-        paysDTOList.forEach(p -> {
+        paysDTOList.forEach(p -> { // clean up names
             String cleanedPays = PaysUtils.cleanCountryName(p.getNom());
             p.setNom(cleanedPays);
         });
+        paysDTOList = DTOUtils.removeDuplicatesByNaturalId(paysDTOList); //remove duplicates
 
         return paysDTOList.stream().map(p -> paysMapper.mapToEntity(p)).toList();     // map to simple entity
     }

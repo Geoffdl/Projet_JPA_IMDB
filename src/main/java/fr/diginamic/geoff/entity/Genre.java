@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Genres")
@@ -72,5 +73,16 @@ public class Genre
      */
     public void setFilms(List<Film> films) {
         this.films = films;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Genre genre)) return false;
+        return Objects.equals(nom, genre.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nom);
     }
 }
