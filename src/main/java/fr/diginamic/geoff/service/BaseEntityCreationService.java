@@ -41,14 +41,14 @@ public class BaseEntityCreationService {
         }
 
         try {
-//            persistActeurs(baseDtoList);
-//            persistFilms(baseDtoList);
-//            persistGenres(baseDtoList);
-//            persistLangues(baseDtoList);
+            persistActeurs(baseDtoList);
+            persistFilms(baseDtoList);
+            persistGenres(baseDtoList);
+            persistLangues(baseDtoList);
             persistLieux(baseDtoList);
-//            persistRealisateurs(baseDtoList);
-//            persistRoles(baseDtoList);
-//            persistPays(baseDtoList);
+            persistRealisateurs(baseDtoList);
+            persistRoles(baseDtoList);
+            persistPays(baseDtoList);
         } finally {
             close();
         }

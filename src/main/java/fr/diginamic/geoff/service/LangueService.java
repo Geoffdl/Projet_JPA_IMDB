@@ -19,4 +19,12 @@ public class LangueService implements EntityService<Langue, String> {
     public List<String> getList(List<FilmDTO> filmDTOList) {
         return filmDTOList.stream().map(f-> f.getLangue()).toList();
     }
+
+    public List<Langue> getLanguesForFilmDTO(FilmDTO dto) {
+        if (dto.getLangue() == null) {
+            return List.of();
+        }
+        return List.of(langueMapper.mapToEntity(dto.getLangue()));
+    }
+
 }

@@ -14,8 +14,9 @@ import java.util.stream.Stream;
  */
 public class ActeurService implements EntityService<Acteur, ActeurDTO> {
 
+    //TODO List Roles Casting
+
     private final ActeurMapper mapper = new ActeurMapper();
-//    EntityMapper<ActeurDTO, Acteur> acteurMapper = new ActeurMapper();
 
     @Override
     public List<Acteur> createEntityList(List<FilmDTO> filmDTOList) {
@@ -59,7 +60,7 @@ public class ActeurService implements EntityService<Acteur, ActeurDTO> {
      * @param filmDTOList
      * @return
      */
-    public List<Acteur> createEntityListFromCasting(List<FilmDTO> filmDTOList) {
+    private List<Acteur> createEntityListFromCasting(List<FilmDTO> filmDTOList) {
         List<ActeurDTO> acteurDTOList = getList(filmDTOList);
 
         return acteurDTOList.stream().map(a -> mapper.mapToEntity(a)).distinct().toList();
@@ -74,5 +75,9 @@ public class ActeurService implements EntityService<Acteur, ActeurDTO> {
         List<ActeurDTO> acteurDTOList = getListFromRole(filmDTOList);
 
         return acteurDTOList.stream().map(a -> mapper.mapToEntity(a)).distinct().toList();
+    }
+
+    public List<Acteur> getActeursForFilmDTO(FilmDTO dto) {
+
     }
 }

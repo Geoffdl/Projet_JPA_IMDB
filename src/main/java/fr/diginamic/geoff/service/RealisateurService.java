@@ -8,6 +8,7 @@ import fr.diginamic.geoff.mapper.PersonneMapper;
 import fr.diginamic.geoff.utils.DTOUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RealisateurService implements EntityService<Realisateur, PersonneDTO> {
 
@@ -28,5 +29,16 @@ public class RealisateurService implements EntityService<Realisateur, PersonneDT
     public List<PersonneDTO> getList(List<FilmDTO> filmDTOList) {
         return filmDTOList.stream().flatMap(d -> d.getRealisateurs().stream()).toList();
     }
-    
+
+
+    public List<Realisateur> getRealisateursForFilmDTO(FilmDTO filmDTO) {
+        if (filmDTO.getRealisateurs() == null) {
+            return List.of();
+        }
+        return filmDTO.getRealisateurs().stream()
+                .filter(Objects::nonNull)
+                .map(personneMapper::mapToEntity)
+                .distinct()
+                .toList();
+    }
 }

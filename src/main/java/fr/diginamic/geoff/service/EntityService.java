@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface EntityService<T, D> {
 
+
+    T createEntity(FilmDTO filmDTO);
     /**
      * This method handles the conversion of DTO to Entity.
      * @param filmDTOList list of raw DTO

@@ -22,6 +22,23 @@ public class PaysService implements EntityService<Pays, PaysDTO> {
 
 
     @Override
+    public Pays createEntity(FilmDTO filmDTO) {
+        if (filmDTO.getPays() == null) {
+            return null;
+        }
+
+        PaysDTO paysDTO = filmDTO.getPays();
+        String cleanedPays = PaysUtils.cleanCountryName(paysDTO.getNom());
+        paysDTO.setNom(cleanedPays);
+
+        // Here you could add a lookup in your DAO or repository
+        // to check if this Pays already exists before creating a new one
+        // Example: return paysRepository.findByNom(cleanedPays).orElse(paysMapper.mapToEntity(paysDTO));
+
+        return paysMapper.mapToEntity(paysDTO);
+    }
+
+    @Override
     public List<Pays> createEntityList(List<FilmDTO> filmDTOList) {
 
         List<Pays> paysList1 = createEntityFromPaysDTO(filmDTOList);

@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public class GenreService implements EntityService<Genre, String> {
 
+
     GenreMapper genreMapper = new GenreMapper();
 
     @Override
@@ -25,5 +26,15 @@ public class GenreService implements EntityService<Genre, String> {
         List<String> genreList = filmDTOList.stream().flatMap(f-> f.getGenres().stream()).filter(Objects::nonNull).toList();
 
         return genreList;
+    }
+    public List<Genre> getGenresForFilmDTO(FilmDTO filmDTO) {
+        if (filmDTO.getGenres() == null) {
+            return List.of();
+        }
+        return filmDTO.getGenres().stream()
+                .filter(Objects::nonNull)
+                .map(genreMapper::mapToEntity)
+                .distinct()
+                .toList();
     }
 }

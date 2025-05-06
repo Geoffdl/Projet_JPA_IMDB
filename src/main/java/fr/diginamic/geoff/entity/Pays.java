@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Pays")
+@Table(name = "Pays", uniqueConstraints = @UniqueConstraint(columnNames = "nom"))
 public class Pays
 {
     @Id
@@ -14,7 +14,7 @@ public class Pays
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paysId;
 
-    @Column(name = "nom", length = 100)
+    @Column(name = "nom", length = 100, nullable = false)
     private String nom;
 
     @Column(name = "url", length = 255)
