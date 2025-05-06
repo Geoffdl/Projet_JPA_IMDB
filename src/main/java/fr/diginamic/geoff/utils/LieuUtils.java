@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class LieuUtils {
 
-    //TODO logging in case of null
     public static String extractLieuVille(NaissanceDTO dto) {
         String lieu = dto.getLieuNaissance();
         if (lieu == null) {
@@ -22,7 +21,6 @@ public class LieuUtils {
                 .collect(Collectors.joining(", "));
     }
 
-    //TODO logging in case of null
     public static String extractLieuRegion(NaissanceDTO dto) {
         String lieu = dto.getLieuNaissance();
         if (lieu == null) {
@@ -36,7 +34,6 @@ public class LieuUtils {
         return parts[parts.length - 2].trim();
     }
 
-    //TODO logging in case of null
     public static String extractLibelle(NaissanceDTO dto) {
         String lieu = dto.getLieuNaissance();
         if (lieu == null) {

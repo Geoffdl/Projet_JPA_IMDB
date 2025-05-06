@@ -9,7 +9,9 @@ import fr.diginamic.geoff.utils.PaysUtils;
 public class PaysMapper implements EntityMapper<PaysDTO, Pays> {
     @Override
     public Pays mapToEntity(PaysDTO dto) {
-
+        if (dto == null || dto.getNom() == null || dto.getNom().isBlank()) {
+            return null;
+        }
         Pays pays = new Pays();
 
         pays.setNom(dto.getNom());

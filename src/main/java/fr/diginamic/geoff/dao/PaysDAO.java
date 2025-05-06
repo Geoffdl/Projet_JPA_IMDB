@@ -1,7 +1,6 @@
 package fr.diginamic.geoff.dao;
 
 import fr.diginamic.geoff.entity.Pays;
-import fr.diginamic.geoff.exception.DuplicatePaysException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class PaysDAO implements EntityDao<Pays> {
+public class PaysDAO {
 
     private final EntityManager entityManager;
 
@@ -18,20 +17,20 @@ public class PaysDAO implements EntityDao<Pays> {
         this.entityManager = entityManager;
     }
 
-    @Override
+
     public Optional<Pays> findById(long id) {
         return Optional.ofNullable(entityManager.find(Pays.class, id));
     }
 
-    @Override
-    public Optional<Pays> findOrCreate(Pays pays) throws DuplicatePaysException {
+
+    public Optional<Pays> findOrCreate(Pays pays)  {
         if (pays == null) {
             return Optional.empty();
         }
         Optional<Pays> existingPays = findByNom(pays.getNom());
 
         if (existingPays.isPresent()) {
-            throw new DuplicatePaysException("Pays already exists: " + pays.getNom());
+            return existingPays;
 
         }
 
@@ -39,13 +38,13 @@ public class PaysDAO implements EntityDao<Pays> {
         return Optional.of(pays);
     }
 
-    @Override
+
     public List<Pays> findAll() {
         TypedQuery<Pays> query = entityManager.createQuery("SELECT p FROM Pays p", Pays.class);
         return query.getResultList();
     }
 
-    @Override
+
     public void delete(Pays pays) {
         if (pays != null) {
             entityManager.remove(pays);

@@ -5,7 +5,6 @@ import fr.diginamic.geoff.dto.LieuTournageDTO;
 import fr.diginamic.geoff.dto.NaissanceDTO;
 import fr.diginamic.geoff.dto.PaysDTO;
 import fr.diginamic.geoff.entity.Pays;
-import fr.diginamic.geoff.exception.DuplicatePaysException;
 import fr.diginamic.geoff.mapper.PaysMapper;
 import fr.diginamic.geoff.utils.PaysUtils;
 import org.slf4j.Logger;
@@ -34,7 +33,7 @@ public class ServicePays {
      * @param paysDTO data source
      * @return Pays instance
      */
-    public Pays getOrCreateFromFilmDTO(PaysDTO paysDTO) throws DuplicatePaysException {
+    public Pays getOrCreateFromPaysDTO(PaysDTO paysDTO)  {
         if (paysDTO == null) {
             return null;
         }
@@ -54,7 +53,7 @@ public class ServicePays {
      * @param dto data source
      * @return Pays instance
      */
-    public Pays getOrCreateFromLieuTournage(LieuTournageDTO dto) throws DuplicatePaysException {
+    public Pays getOrCreateFromLieuTournage(LieuTournageDTO dto)  {
         if (dto == null) {
             return null;
         }
@@ -79,7 +78,7 @@ public class ServicePays {
      * @param dto data source
      * @return Pays instance
      */
-    public Pays getOrCreateFromNaissance(NaissanceDTO dto) throws DuplicatePaysException {
+    public Pays getOrCreateFromNaissance(NaissanceDTO dto)  {
         if (dto == null) {
             return null;
         }

@@ -3,6 +3,7 @@ package fr.diginamic.geoff;
 import fr.diginamic.geoff.dto.FilmDTO;
 import fr.diginamic.geoff.parser.JsonParser;
 import fr.diginamic.geoff.service2.EntityCreationOrchestrator;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.slf4j.Logger;
@@ -25,14 +26,17 @@ public class App {
 
         JsonParser parser = new JsonParser();
 
-        try {
+        try (EntityManager em = emf.createEntityManager()){
             List<FilmDTO> filmDTOList = parser.tryReading(FilmDTO.class, FILMS_JSON);
-            EntityCreationOrchestrator createEntities = new EntityCreationOrchestrator(filmDTOList, "imdb");
+
+            EntityCreationOrchestrator createEntities = new EntityCreationOrchestrator(filmDTOList, em);
 
             createEntities.orchestrateEntityCreation();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            emf.close();
         }
 
 
