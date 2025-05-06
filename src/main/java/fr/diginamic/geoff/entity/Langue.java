@@ -17,10 +17,8 @@ public class Langue {
     @Column(name = "nom", length = 50)
     private String nom;
 
-    @ManyToMany
-    @JoinTable(name = "Films_Langues",
-            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
-            joinColumns = @JoinColumn(name = "langue_id", referencedColumnName = "langue_id"))
+    @ManyToMany(mappedBy = "langues")
+
     private List<Film> films = new ArrayList<>();
 
     public Langue() {

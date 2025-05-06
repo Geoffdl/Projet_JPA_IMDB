@@ -37,13 +37,31 @@ public class Film {
     @OneToMany(mappedBy = "film")
     private List<Role> roles = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "films")
+    @ManyToMany
+    @JoinTable(name = "Films_Langues",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "langue_id", referencedColumnName = "langue_id"))
     private List<Langue> langues = new ArrayList<>();
-    @ManyToMany(mappedBy = "films")
+
+
+    @ManyToMany
+    @JoinTable(name = "Films_Genres",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "genre_id"))
     private List<Genre> genres = new ArrayList<>();
-    @ManyToMany(mappedBy = "films")
+
+
+    @ManyToMany
+    @JoinTable(name = "Films_Realisateurs",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "realisateur_id", referencedColumnName = "personne_id"))
     private List<Realisateur> realisateurs = new ArrayList<>();
-    @ManyToMany(mappedBy = "films")
+
+
+    @ManyToMany
+    @JoinTable(name = "CastingPrincipal",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "acteur_id", referencedColumnName = "personne_id"))
     private List<Acteur> acteurs = new ArrayList<>();
 
 

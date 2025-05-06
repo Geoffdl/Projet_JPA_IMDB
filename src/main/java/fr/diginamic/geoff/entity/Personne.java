@@ -21,12 +21,6 @@ public abstract class Personne
     @Column(name = "identite", length = 100)
     private String identite;
 
-//    @Column(name = "nom", length = 50)
-//    private String nom;
-//
-//    @Column(name = "prenom", length = 50)
-//    private String prenom;
-
     @Column(name = "dateNaissance")
     private LocalDate dateNaissance;
 

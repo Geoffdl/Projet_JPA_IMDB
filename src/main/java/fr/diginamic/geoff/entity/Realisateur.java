@@ -1,7 +1,9 @@
 package fr.diginamic.geoff.entity;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
@@ -10,10 +12,7 @@ import java.util.List;
 public class Realisateur extends Personne
 {
 
-    @ManyToMany
-    @JoinTable(name = "Films_Realisateurs",
-            joinColumns = @JoinColumn(name = "realisateur_id", referencedColumnName = "personne_id"),
-            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"))
+    @ManyToMany(mappedBy = "realisateurs")
     List<Film> films;
 
 
