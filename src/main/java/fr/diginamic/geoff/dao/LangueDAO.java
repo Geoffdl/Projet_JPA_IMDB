@@ -7,11 +7,11 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.Optional;
 
-public class LangueDao implements Dao<Langue> {
+public class LangueDAO implements Dao<Langue> {
 
    private final EntityManager em;
 
-    public LangueDao(EntityManager em) {
+    public LangueDAO(EntityManager em) {
         this.em = em;
     }
 

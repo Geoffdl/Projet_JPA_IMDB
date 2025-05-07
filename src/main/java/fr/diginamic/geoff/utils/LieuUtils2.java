@@ -5,64 +5,79 @@ import fr.diginamic.geoff.dto.NaissanceDTO;
 public class LieuUtils2 {
 
     /**
-     * Extract the city/town part from a birth location
-     * For locations like "City, Region, Country", returns "City"
-     * For locations like "City-Neighborhood, Region, Country", returns "City-Neighborhood"
+     * @param dto
+     * @return
      */
     public static String extractLieuVille(NaissanceDTO dto) {
-        String lieu = dto.getLieuNaissance();
-        if (lieu == null || lieu.trim().isEmpty()) {
+        if (dto == null || dto.getLieuNaissance() == null) {
             return "";
         }
+        String[] parts = dto.getLieuNaissance().split(",");
 
-        String[] parts = lieu.split(",");
-        if (parts.length == 0) {
-            return "";
+        switch (parts.length) {
+            case 1:
+                return parts[0].trim();
+            case 2:
+                return parts[0].trim();
+
+            case 3:
+                return parts[0].trim();
+            case 4:
+                StringBuilder sb = new StringBuilder();
+                return sb.append(parts[0].trim()).append(",").append(parts[1].trim()).toString();
+            default:
+                return parts[0].trim();
         }
 
-        // First part is always the city/town
-        return parts[0].trim();
     }
 
     /**
-     * Extract the region/state part from a birth location
-     * For locations like "City, Region, Country", returns "Region"
-     * For locations like "City, Country", returns ""
+     *
+     * @param dto
+     * @return
      */
     public static String extractLieuRegion(NaissanceDTO dto) {
-        String lieu = dto.getLieuNaissance();
-        if (lieu == null || lieu.trim().isEmpty()) {
+        if (dto == null || dto.getLieuNaissance() == null) {
             return "";
+        }
+        String[] parts = dto.getLieuNaissance().split(",");
+        switch (parts.length) {
+            case 1:
+                return "";
+            case 2:
+                return "";
+
+            case 3:
+                return parts[1].trim();
+            case 4:
+                return parts[2].trim();
+            default:
+                return parts[parts.length - 2].trim();
         }
 
-        String[] parts = lieu.split(",");
-        if (parts.length < 2) {
-            return "";  // No region info available
-        } else if (parts.length == 2) {
-            // For "City, Country" format, there's no region
-            return "";
-        } else {
-            // For "City, Region, Country" format, region is the second-to-last part
-            return parts[parts.length - 2].trim();
-        }
     }
 
     /**
-     * Extract the full location string for display purposes
+     *
+     * @param dto
+     * @return
      */
     public static String extractLibelle(NaissanceDTO dto) {
-        String lieu = dto.getLieuNaissance();
-        if (lieu == null) {
+        if (dto == null || dto.getLieuNaissance() == null) {
             return "";
         }
-        return lieu.trim();
-    }
+        String libbelle = dto.getLieuNaissance();
+        String[] parts = libbelle.split(",");
+        StringBuilder sb = new StringBuilder();
 
-    /**
-     * Determines whether the location has enough information to create a valid Lieu entity
-     */
-    public static boolean isValidLieu(NaissanceDTO dto) {
-        String lieu = dto.getLieuNaissance();
-        return lieu != null && !lieu.trim().isEmpty() && lieu.contains(",");
+        for (int i = 0; i < parts.length -1; i++) {
+            sb.append(parts[i].trim());
+            if (i < parts.length - 2) {
+                sb.append(",");
+            }
+        }
+
+        return sb.toString();
+
     }
 }

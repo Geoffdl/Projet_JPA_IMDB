@@ -13,21 +13,22 @@ public class LieuNaissanceMapper implements EntityMapper<NaissanceDTO, Lieu> {
 
         lieu.setVille(extractLieuVille(dto));
         lieu.setRegion(extractLieuRegion(dto));
-//        lieu.setLibelle(extractLibelle(dto));
+        lieu.setLibelle(extractLibelle(dto));
 
         return lieu;
     }
 
 
-    //TODO Appropriate util methods to extract the corresponding data from the LieuxNaissance String in the raw data
-    private String extractLieuVille(NaissanceDTO dto){
+    private String extractLieuVille(NaissanceDTO dto) {
         return LieuUtils2.extractLieuVille(dto);
 
     }
-    private String extractLieuRegion(NaissanceDTO dto){
+
+    private String extractLieuRegion(NaissanceDTO dto) {
         return LieuUtils2.extractLieuRegion(dto);
     }
-    private String extractLibelle(NaissanceDTO dto){
+
+    private String extractLibelle(NaissanceDTO dto) {
         return LieuUtils2.extractLibelle(dto);
     }
 }

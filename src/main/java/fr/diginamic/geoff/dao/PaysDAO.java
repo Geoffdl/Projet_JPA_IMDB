@@ -5,7 +5,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -17,13 +16,7 @@ public class PaysDAO {
         this.entityManager = entityManager;
     }
 
-
-    public Optional<Pays> findById(long id) {
-        return Optional.ofNullable(entityManager.find(Pays.class, id));
-    }
-
-
-    public Optional<Pays> findOrCreate(Pays pays)  {
+    public Optional<Pays> findOrCreate(Pays pays) {
         if (pays == null) {
             return Optional.empty();
         }
@@ -38,19 +31,6 @@ public class PaysDAO {
         return Optional.of(pays);
     }
 
-
-    public List<Pays> findAll() {
-        TypedQuery<Pays> query = entityManager.createQuery("SELECT p FROM Pays p", Pays.class);
-        return query.getResultList();
-    }
-
-
-    public void delete(Pays pays) {
-        if (pays != null) {
-            entityManager.remove(pays);
-        }
-    }
-
     /**
      * Find a Pays entity by its name (natural key)
      *
@@ -61,7 +41,6 @@ public class PaysDAO {
         if (nom == null || nom.isEmpty()) {
             return Optional.empty();
         }
-
         try {
             TypedQuery<Pays> query = entityManager.createQuery(
                     "SELECT p FROM Pays p WHERE p.nom = :nom", Pays.class);

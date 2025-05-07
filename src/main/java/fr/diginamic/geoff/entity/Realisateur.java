@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Realisateur extends Personne
 {
 
     @ManyToMany(mappedBy = "realisateurs")
-    List<Film> films;
+    List<Film> films = new ArrayList<>();
 
 
 

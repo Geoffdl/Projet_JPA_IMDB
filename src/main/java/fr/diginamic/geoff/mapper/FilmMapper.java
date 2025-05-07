@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Year;
+import java.util.ArrayList;
 
 public class FilmMapper implements EntityMapper<FilmDTO, Film> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FilmMapper.class);
@@ -19,12 +20,16 @@ public class FilmMapper implements EntityMapper<FilmDTO, Film> {
         film.setResume(mapAttributeResume(dto));
         film.setAnnee(mapAttributeAnnee(dto));
         film.setRating(mapAttributeRating(dto));
+        film.setRoles(new ArrayList<>());
 
         return film;
     }
 
-//TODO proper null and error handling
-
+    /**
+     *
+     * @param dto
+     * @return
+     */
     private String mapAttributeImdbId(FilmDTO dto)  {
         if(dto.getImdbId() == null){
             LOGGER.warn("Missing Imdb Id for film: {}", "x");
@@ -32,6 +37,12 @@ public class FilmMapper implements EntityMapper<FilmDTO, Film> {
         }
         return dto.getImdbId();
     }
+
+    /**
+     *
+     * @param dto
+     * @return
+     */
     private String mapAttributeTitre(FilmDTO dto) {
         if(dto.getNom() == null){
             LOGGER.warn("Missing title for film: {}", "x");

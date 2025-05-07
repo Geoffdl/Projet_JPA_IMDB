@@ -1,4 +1,4 @@
-package fr.diginamic.geoff.service2;
+package fr.diginamic.geoff.service;
 
 import fr.diginamic.geoff.dao.LieuDAO;
 import fr.diginamic.geoff.dto.FilmDTO;
@@ -11,8 +11,8 @@ import fr.diginamic.geoff.mapper.LieuTournageMapper;
 
 import java.util.Optional;
 
-import static fr.diginamic.geoff.utils.LieuUtils2.extractLieuRegion;
-import static fr.diginamic.geoff.utils.LieuUtils2.extractLieuVille;
+import static fr.diginamic.geoff.utils.LieuUtils.extractLieuRegion;
+import static fr.diginamic.geoff.utils.LieuUtils.extractLieuVille;
 
 public class ServiceLieu {
     private final LieuNaissanceMapper lieuNaissanceMapper = new LieuNaissanceMapper();

@@ -2,6 +2,7 @@ package fr.diginamic.geoff.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,10 +14,10 @@ public class Acteur extends Personne
 
 
     @ManyToMany(mappedBy = "acteurs")
-    List<Film> films;
+   private List<Film> films = new ArrayList<>();
 
     @OneToMany(mappedBy = "acteur")
-    private List<Role> roles;
+    private List<Role> roles =new ArrayList<>();
 
     public Acteur()
     {

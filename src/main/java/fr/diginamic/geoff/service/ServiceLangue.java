@@ -1,6 +1,6 @@
-package fr.diginamic.geoff.service2;
+package fr.diginamic.geoff.service;
 
-import fr.diginamic.geoff.dao.LangueDao;
+import fr.diginamic.geoff.dao.LangueDAO;
 import fr.diginamic.geoff.dto.FilmDTO;
 import fr.diginamic.geoff.entity.Langue;
 import fr.diginamic.geoff.mapper.LangueMapper;
@@ -9,12 +9,17 @@ import java.util.Optional;
 
 public class ServiceLangue {
     private final LangueMapper langueMapper = new LangueMapper();
-    private final LangueDao langueDao;
+    private final LangueDAO langueDao;
 
-    public ServiceLangue(LangueDao langueDao) {
+    public ServiceLangue(LangueDAO langueDao) {
         this.langueDao = langueDao;
     }
 
+    /**
+     *
+     * @param filmDTO
+     * @return
+     */
     public Langue getOrCreateFromFilmDTO(FilmDTO filmDTO) {
         if (filmDTO == null && filmDTO.getLangue() == null) {
             return null;
@@ -30,5 +35,6 @@ public class ServiceLangue {
         return langueDao.create(newLangue);
 
     }
+
 
 }

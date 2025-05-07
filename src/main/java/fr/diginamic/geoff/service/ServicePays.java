@@ -1,4 +1,4 @@
-package fr.diginamic.geoff.service2;
+package fr.diginamic.geoff.service;
 
 import fr.diginamic.geoff.dao.PaysDAO;
 import fr.diginamic.geoff.dto.LieuTournageDTO;

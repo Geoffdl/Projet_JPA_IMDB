@@ -7,8 +7,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.Optional;
 
-public class LieuDAO
-{
+public class LieuDAO {
     private final EntityManager em;
 
     public LieuDAO(EntityManager em) {
@@ -28,7 +27,7 @@ public class LieuDAO
         }
     }
 
-    public Lieu create(Lieu lieu){
+    public Lieu create(Lieu lieu) {
         em.persist(lieu);
         return lieu;
     }

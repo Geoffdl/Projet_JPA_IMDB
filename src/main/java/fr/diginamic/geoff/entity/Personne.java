@@ -8,8 +8,7 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Personnes")
-public abstract class Personne
-{
+public abstract class Personne {
     @Id
     @Column(name = "personne_id", length = 11)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +26,11 @@ public abstract class Personne
     @Column(name = "url", length = 255)
     private String url;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "lieu_id")
     private Lieu lieuxNaissance;
 
-
-    public Personne()
-    {
+    public Personne() {
     }
 
     /**
@@ -63,41 +60,6 @@ public abstract class Personne
         this.imdbId = imdbId;
     }
 
-//    /**
-//     * Gets nom for the class Personne
-//     *
-//     * @return value of nom
-//     */
-//    public String getNom() {
-//        return nom;
-//    }
-//
-//    /**
-//     * Sets nom for the class Personne.
-//     *
-//     * @param nom value of nom
-//     */
-//    public void setNom(String nom) {
-//        this.nom = nom;
-//    }
-//
-//    /**
-//     * Gets prenom for the class Personne
-//     *
-//     * @return value of prenom
-//     */
-//    public String getPrenom() {
-//        return prenom;
-//    }
-//
-//    /**
-//     * Sets prenom for the class Personne.
-//     *
-//     * @param prenom value of prenom
-//     */
-//    public void setPrenom(String prenom) {
-//        this.prenom = prenom;
-//    }
 
     /**
      * Gets dateNaissance for the class Personne
@@ -173,7 +135,8 @@ public abstract class Personne
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Personne personne)) return false;
+        if (!(object instanceof Personne personne))
+            return false;
         return Objects.equals(imdbId, personne.imdbId);
     }
 

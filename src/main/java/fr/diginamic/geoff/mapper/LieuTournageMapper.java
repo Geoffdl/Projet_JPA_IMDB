@@ -12,7 +12,16 @@ public class LieuTournageMapper implements EntityMapper<LieuTournageDTO, Lieu> {
 
         lieu.setRegion(dto.getEtatDept().trim());
         lieu.setVille(dto.getVille().trim());
+        setLibelle(lieu, dto);
 
         return lieu;
+    }
+
+    private void setLibelle(Lieu lieu, LieuTournageDTO dto) {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(dto.getVille()).append(dto.getEtatDept());
+
+        lieu.setLibelle(sb.toString());
     }
 }
