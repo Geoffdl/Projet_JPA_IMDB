@@ -1,4 +1,4 @@
-package fr.diginamic.geoff.service2;
+package fr.diginamic.geoff.service;
 
 import fr.diginamic.geoff.dao.GenreDAO;
 import fr.diginamic.geoff.entity.Genre;
@@ -15,6 +15,11 @@ public class ServiceGenre {
         this.genreMapper = new GenreMapper();
     }
 
+    /**
+     *
+     * @param nom
+     * @return
+     */
     public Genre getOrCreateFromFilmDTO(String nom) {
         if (nom == null) {
             return null;

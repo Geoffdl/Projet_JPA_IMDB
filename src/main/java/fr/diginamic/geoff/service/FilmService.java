@@ -1,122 +1,169 @@
 package fr.diginamic.geoff.service;
 
+import fr.diginamic.geoff.dao.FilmDAO;
+import fr.diginamic.geoff.dao.RoleDAO;
+import fr.diginamic.geoff.dto.ActeurDTO;
 import fr.diginamic.geoff.dto.FilmDTO;
+import fr.diginamic.geoff.dto.PersonneDTO;
 import fr.diginamic.geoff.dto.RoleDTO;
 import fr.diginamic.geoff.entity.*;
-import fr.diginamic.geoff.mapper.EntityMapper;
 import fr.diginamic.geoff.mapper.FilmMapper;
-import fr.diginamic.geoff.utils.DTOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class FilmService implements EntityService<Film, FilmDTO> {
+public class FilmService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FilmService.class);
 
-    EntityMapper<FilmDTO, Film> filmMapper = new FilmMapper();
+    private final FilmMapper filmMapper = new FilmMapper();
+    private final FilmDAO filmDAO;
+    private final RoleDAO roleDAO;
+    private final ServiceRole serviceRole;
+    private final ServiceLieu serviceLieu;
+    private final ServicePersonne servicePersonne;
+    private final ServicePays servicePays;
+    private final ServiceLangue serviceLangue;
+    private final ServiceGenre serviceGenre;
 
-    private final RoleService roleService;
-    private final GenreService genreService;
-    private final LangueService langueService;
-    private final RealisateurService realisateurService;
-    private final ActeurService acteurService;
-    private final LieuService lieuService;
-    private final PaysService paysService;
-
-    //TODO Relationship add List : Genre, Langues, Realisateurs, Casting, Roles
-    //TODO fkey lieu pays
-
-    public FilmService(GenreService genreService, LangueService langueService, RealisateurService realisateurService,
-                       ActeurService acteurService, LieuService lieuService, PaysService paysService, RoleService roleService) {
-        this.genreService = genreService;
-        this.langueService = langueService;
-        this.realisateurService = realisateurService;
-        this.acteurService = acteurService;
-        this.lieuService = lieuService;
-        this.paysService = paysService;
-        this.roleService = roleService;
+    public FilmService(ServiceRole serviceRole, ServiceLieu serviceLieu, FilmDAO filmDAO, RoleDAO roleDAO, ServicePersonne servicePersonne, ServicePays servicePays, ServiceLangue serviceLangue, ServiceGenre serviceGenre) {
+        this.serviceLieu = serviceLieu;
+        this.filmDAO = filmDAO;
+        this.roleDAO = roleDAO;
+        this.servicePersonne = servicePersonne;
+        this.servicePays = servicePays;
+        this.serviceLangue = serviceLangue;
+        this.serviceGenre = serviceGenre;
+        this.serviceRole = serviceRole;
     }
 
-    @Override
-    public Film createEntity(FilmDTO filmDTO) {
+    /**
+     * Film owns :
+     * Pays, Lieu, Genres, Langues, Acteurs, Realisateurs, Casting
+     */
 
-        Film film = filmMapper.mapToEntity(filmDTO);
-
-        //Many to Many
-        film.setGenres(mapGenres(filmDTO));
-        film.setLangues(mapLangues(filmDTO));
-        film.setRealisateurs(mapRealisateurs(filmDTO));
-        film.setActeurs(mapActeurs(filmDTO));
-
-        //Many to One
-        film.setLieuTournage(mapLieu(filmDTO));
-        film.setPays(mapPays(filmDTO));
-
-        //Role
-        for (Role role : roles) {
-            if (role.getActeur() == null && filmDTO.getRoles() != null) {
-                // Find matching RoleDTO to get its actor
-                for (RoleDTO roleDTO : filmDTO.getRoles()) {
-                    if (roleDTO.getPersonnage().equals(role.getPersonnage())) {
-                        // Find or create the corresponding Acteur entity
-                        Acteur acteur = acteurService.findOrCreateActeurFromDTO(roleDTO.getActeur());
-                        role.setActeur(acteur);
-                        break;
-                    }
-                }
-            }
+    public Film getOrCreateFilm(FilmDTO filmDTO) {
+        if (filmDTO == null) {
+            return null;
         }
-        film.setRoles(mapRoles(filmDTO));
-        return film;
+
+        Optional<Film> existingFilm = filmDAO.findByImdbId(filmDTO.getImdbId());
+        if (existingFilm.isPresent()) {
+            return existingFilm.get();
+        }
+
+        Film newFilm = filmMapper.mapToEntity(filmDTO);
+
+        setOrCreatePays(filmDTO, newFilm);
+        setOrCreateLieu(filmDTO, newFilm);
+        setOrCreateGenres(filmDTO, newFilm);
+        setOrCreateLangues(filmDTO, newFilm);
+        setOrCreateRealisateur(filmDTO, newFilm);
+        setOrCreateCasting(filmDTO, newFilm);
+
+
+        LOGGER.info("Film ajouté {} ", newFilm.getTitre());
+
+        filmDAO.create(newFilm);
+
+        setOrCreateRoles(filmDTO, newFilm);
+
+        return newFilm;
     }
 
-    @Override
-    public List<Film> createEntityList(List<FilmDTO> filmDTOList) {
-        filmDTOList = DTOUtils.removeDuplicatesByNaturalId(filmDTOList); //remove duplicates
-
-
-        List<Film> filmList = filmDTOList.stream().map(dto -> {
-            try {
-                return createEntity(dto);
-            } catch (Exception e) {
-                //log
-                return null;
+    private void setOrCreateRoles(FilmDTO filmDTO, Film newFilm) {
+        if (filmDTO.getRoles() == null || filmDTO.getRoles().isEmpty()) {
+            return;
+        }
+        List<Role> roleList = new ArrayList<>();
+        for (RoleDTO roleDTO : filmDTO.getRoles()) {
+            if (roleDTO == null || roleDTO.getActeur() == null) {
+                continue;
             }
-        }).toList();
+            Acteur acteur = servicePersonne.getOrCreateFromActeurDTO(roleDTO.getActeur());
 
-        return filmList;
+            Role role = serviceRole.getOrCreateRoles(roleDTO, newFilm, acteur);
+
+
+            if (acteur.getRoles() == null) {
+                acteur.setRoles(new ArrayList<>());
+            }
+            acteur.getRoles().add(role);
+
+            roleList.add(role);
+        }
+        newFilm.getRoles().addAll(roleList);
     }
 
-    private Pays mapPays(FilmDTO dto) {
-        return paysService.getPaysForFilmDTO(dto);
+    private void setOrCreatePays(FilmDTO filmDTO, Film newFilm) {
+        if (filmDTO.getPays() == null) {
+            return;
+        }
+        Pays pays = servicePays.getOrCreateFromPaysDTO(filmDTO.getPays());
+        newFilm.setPays(pays);
+
     }
 
-    private Lieu mapLieu(FilmDTO dto) {
-        return lieuService.getLieuForFilmDTO(dto);
+    private void setOrCreateLieu(FilmDTO filmDTO, Film newFilm) {
+        if (filmDTO.getLieuTournage() == null) {
+            return;
+        }
+        Lieu lieu = serviceLieu.getOrCreateFromFilmDTO(filmDTO);
+        newFilm.setLieuTournage(lieu);
+
+
     }
 
-    private List<Role> mapRoles(FilmDTO dto) {
-        return roleService.getRolesForFilmDTO(dto);
+    private void setOrCreateGenres(FilmDTO filmDTO, Film newFilm) {
+        List<String> genreFromDTO = new ArrayList<>();
+        if (filmDTO.getGenres() == null) {
+            return;
+        }
+        genreFromDTO = filmDTO.getGenres();
+        List<Genre> genreList = new ArrayList<>();
+        for (String genre : genreFromDTO) {
+            genreList.add(serviceGenre.getOrCreateFromFilmDTO(genre));
+        }
+        newFilm.setGenres(genreList);
+
     }
 
-    private List<Acteur> mapActeurs(FilmDTO dto) {
-        return acteurService.getActeursForFilmDTO(dto);
+    private void setOrCreateLangues(FilmDTO filmDTO, Film newFilm) {
+        List<String> languesFromDTO = new ArrayList<>();
+        if (filmDTO.getLangue() != null) {
+            languesFromDTO.add(filmDTO.getLangue());
+            List<Langue> langueList = new ArrayList<>();
+            for (String genre : languesFromDTO) {
+                langueList.add(serviceLangue.getOrCreateFromFilmDTO(filmDTO));
+            }
+            newFilm.setLangues(langueList);
+        }
     }
 
-    private List<Realisateur> mapRealisateurs(FilmDTO dto) {
-        return realisateurService.getRealisateursForFilmDTO(dto);
+
+    private void setOrCreateRealisateur(FilmDTO filmDTO, Film newFilm) {
+        List<PersonneDTO> realisateurDTOList = new ArrayList<>();
+        if (filmDTO.getRealisateurs() != null) {
+            realisateurDTOList = filmDTO.getRealisateurs();
+            List<Realisateur> realisateurList = new ArrayList<>();
+            for (PersonneDTO real : realisateurDTOList) {
+                realisateurList.add(servicePersonne.getOrCreateFromPersonneDTO(real));
+            }
+            newFilm.setRealisateurs(realisateurList);
+        }
     }
 
-    private List<Langue> mapLangues(FilmDTO dto) {
-        return langueService.getLanguesForFilmDTO(dto);
-    }
-
-
-    private List<Genre> mapGenres(FilmDTO dto) {
-        return genreService.getGenresForFilmDTO(dto);
-    }
-
-    //not needed in this case
-    @Override
-    public List<FilmDTO> getList(List<FilmDTO> filmDTOList) {
-        return List.of();
+    private void setOrCreateCasting(FilmDTO filmDTO, Film newFilm) {
+        List<ActeurDTO> acteurDTOList = new ArrayList<>();
+        if (filmDTO.getCastingPrincipal() != null) {
+            acteurDTOList = filmDTO.getCastingPrincipal();
+            List<Acteur> acteurList = new ArrayList<>();
+            for (ActeurDTO acteurDTO : acteurDTOList) {
+                acteurList.add(servicePersonne.getOrCreateFromActeurDTO(acteurDTO));
+            }
+            newFilm.setActeurs(acteurList);
+        }
     }
 }

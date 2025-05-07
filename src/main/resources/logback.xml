@@ -1,41 +1,41 @@
 <configuration>
 
-    <!-- Appender for service logs -->
-    <appender name="SERVICE_FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/service.log</file>
-        <append>true</append>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger{36}] - %msg%n</pattern>
-        </encoder>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
-        </filter>
-    </appender>
+<!-- Appender for service logs -->
+<appender name="SERVICE_FILE" class="ch.qos.logback.core.FileAppender">
+    <file>logs/service.log</file>
+    <append>true</append>
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger{36}] - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>INFO</level>
+    </filter>
+</appender>
 
-    <!-- Root logger: minimal console output -->
-    <root level="WARN">
-        <appender-ref ref="CONSOLE" />
-    </root>
+<!-- Root logger: minimal console output -->
+<root level="WARN">
+    <appender-ref ref="CONSOLE" />
+</root>
 
-    <!-- Console appender (optional, for dev) -->
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+<!-- Console appender (optional, for dev) -->
+<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+</appender>
 
-    <!-- Logger for your service package -->
-    <logger name="fr.diginamic.geoff.service2" level="INFO" additivity="false">
-        <appender-ref ref="SERVICE_FILE" />
-    </logger>
+<!-- Logger for your service package -->
+<logger name="fr.diginamic.geoff.service" level="INFO" additivity="false">
+    <appender-ref ref="SERVICE_FILE" />
+</logger>
 
-    <!-- Hibernate and DB noise suppression -->
-    <logger name="org.hibernate" level="WARN"/>
-    <logger name="org.hibernate.SQL" level="WARN"/>
-    <logger name="org.hibernate.type" level="WARN"/>
-    <logger name="org.hibernate.stat" level="WARN"/>
-    <logger name="org.hibernate.tool.hbm2ddl" level="WARN"/>
-    <logger name="org.mariadb" level="WARN"/>
-    <logger name="org.mariadb.jdbc" level="WARN"/>
+<!-- Hibernate and DB noise suppression -->
+<logger name="org.hibernate" level="WARN"/>
+<logger name="org.hibernate.SQL" level="WARN"/>
+<logger name="org.hibernate.type" level="WARN"/>
+<logger name="org.hibernate.stat" level="WARN"/>
+<logger name="org.hibernate.tool.hbm2ddl" level="WARN"/>
+<logger name="org.mariadb" level="WARN"/>
+<logger name="org.mariadb.jdbc" level="WARN"/>
 
 </configuration>

@@ -2,6 +2,7 @@ package fr.diginamic.geoff.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +22,7 @@ public class Pays
     private String url;
 
     @OneToMany(mappedBy = "pays")
-    private List<Film> films;
+    private List<Film> films = new ArrayList<>();
 
     public Pays()
     {

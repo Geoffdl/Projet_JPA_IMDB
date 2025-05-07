@@ -2,6 +2,8 @@ package fr.diginamic.geoff.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "Roles")
 public class Role
@@ -89,5 +91,16 @@ public class Role
      */
     public void setPersonnage(String personnage) {
         this.personnage = personnage;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Role role)) return false;
+        return Objects.equals(personnage, role.personnage);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(personnage);
     }
 }

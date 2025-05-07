@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Year;
+import java.util.ArrayList;
 
 public class FilmMapper implements EntityMapper<FilmDTO, Film> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FilmMapper.class);
@@ -19,6 +20,7 @@ public class FilmMapper implements EntityMapper<FilmDTO, Film> {
         film.setResume(mapAttributeResume(dto));
         film.setAnnee(mapAttributeAnnee(dto));
         film.setRating(mapAttributeRating(dto));
+        film.setRoles(new ArrayList<>());
 
         return film;
     }
