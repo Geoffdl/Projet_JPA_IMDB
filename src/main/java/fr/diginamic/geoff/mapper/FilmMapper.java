@@ -25,8 +25,11 @@ public class FilmMapper implements EntityMapper<FilmDTO, Film> {
         return film;
     }
 
-//TODO proper null and error handling
-
+    /**
+     *
+     * @param dto
+     * @return
+     */
     private String mapAttributeImdbId(FilmDTO dto)  {
         if(dto.getImdbId() == null){
             LOGGER.warn("Missing Imdb Id for film: {}", "x");
@@ -34,6 +37,12 @@ public class FilmMapper implements EntityMapper<FilmDTO, Film> {
         }
         return dto.getImdbId();
     }
+
+    /**
+     *
+     * @param dto
+     * @return
+     */
     private String mapAttributeTitre(FilmDTO dto) {
         if(dto.getNom() == null){
             LOGGER.warn("Missing title for film: {}", "x");

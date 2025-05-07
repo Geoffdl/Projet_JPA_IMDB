@@ -1,8 +1,8 @@
 package fr.diginamic.geoff;
 
 import fr.diginamic.geoff.dto.FilmDTO;
-import fr.diginamic.geoff.parser.JsonParser;
 import fr.diginamic.geoff.service.EntityCreationOrchestrator;
+import fr.diginamic.geoff.utils.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -4,6 +4,7 @@ import fr.diginamic.geoff.dto.NaissanceDTO;
 
 public class LieuUtils {
 
+    //TODO fine tune the logic
     /**
      * Extract the city/town part from a birth location
      * For locations like "City, Region, Country", returns "City"
@@ -58,11 +59,4 @@ public class LieuUtils {
         return lieu.trim();
     }
 
-    /**
-     * Determines whether the location has enough information to create a valid Lieu entity
-     */
-    public static boolean isValidLieu(NaissanceDTO dto) {
-        String lieu = dto.getLieuNaissance();
-        return lieu != null && !lieu.trim().isEmpty() && lieu.contains(",");
-    }
 }

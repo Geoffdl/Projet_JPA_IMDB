@@ -53,48 +53,5 @@ public class EntityCreationOrchestrator {
         }
 
     }
-/*
-    private void createPersonnes() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            ServiceCreationPersonne serviceCreationPersonne = new ServiceCreationPersonne(em, filmDTOList);
-            LOGGER.info("Starting creation of Realisateurs entities");
-            serviceCreationPersonne.createRealisateur();
-            LOGGER.info("Starting creation of Acteurs entities");
-            serviceCreationPersonne.createActeurFromCasting();
-            serviceCreationPersonne.createActeurFromRole();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            em.close();
-        }
 
-    }
-/*
-    private void createLieux() {
-        ServiceCreationLieu serviceCreationLieu = new ServiceCreationLieu(em,filmDTOList);
-        LOGGER.info("Starting creation of Lieu entities");
-        serviceCreationLieu.createLieu();
-    }
-
-    private void createGenres() {
-        ServiceCreationGenre serviceCreationGenre = new ServiceCreationGenre(em,filmDTOList);
-        LOGGER.info("Starting creation of Genre entities");
-        serviceCreationGenre.createGenreFromFilmDTO();
-    }
-
-    private void createPays() {
-        ServiceCreationPays paysCreation = new ServiceCreationPays(em, filmDTOList);
-
-        LOGGER.info("Starting creation of Pays entities");
-        paysCreation.createPays();
-    }
-
-    private void createLangues() {
-        ServiceCreationLangue creationLangue = new ServiceCreationLangue(em, filmDTOList);
-
-        LOGGER.info("Starting creation of Langue entities");
-        creationLangue.createLangueFromFilmDTO();
-    }
-*/
 }

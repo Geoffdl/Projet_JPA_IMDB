@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class FilmService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FilmService.class);
+public class ServiceFilm {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceFilm.class);
 
     private final FilmMapper filmMapper = new FilmMapper();
     private final FilmDAO filmDAO;
@@ -28,7 +28,7 @@ public class FilmService {
     private final ServiceLangue serviceLangue;
     private final ServiceGenre serviceGenre;
 
-    public FilmService(ServiceRole serviceRole, ServiceLieu serviceLieu, FilmDAO filmDAO, RoleDAO roleDAO, ServicePersonne servicePersonne, ServicePays servicePays, ServiceLangue serviceLangue, ServiceGenre serviceGenre) {
+    public ServiceFilm(ServiceRole serviceRole, ServiceLieu serviceLieu, FilmDAO filmDAO, RoleDAO roleDAO, ServicePersonne servicePersonne, ServicePays servicePays, ServiceLangue serviceLangue, ServiceGenre serviceGenre) {
         this.serviceLieu = serviceLieu;
         this.filmDAO = filmDAO;
         this.roleDAO = roleDAO;
@@ -135,9 +135,9 @@ public class FilmService {
         if (filmDTO.getLangue() != null) {
             languesFromDTO.add(filmDTO.getLangue());
             List<Langue> langueList = new ArrayList<>();
-            for (String genre : languesFromDTO) {
-                langueList.add(serviceLangue.getOrCreateFromFilmDTO(filmDTO));
-            }
+
+            languesFromDTO.forEach(l -> langueList.add(serviceLangue.getOrCreateFromFilmDTO(filmDTO)));
+
             newFilm.setLangues(langueList);
         }
     }

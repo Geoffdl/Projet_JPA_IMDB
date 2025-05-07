@@ -10,7 +10,7 @@ import java.util.List;
 public class ServiceCreationFilm {
     private final EntityManager em;
     private final List<FilmDTO> filmDTOList;
-    private final FilmService serviceFilm;
+    private final ServiceFilm serviceFilm;
     private final ServiceRole serviceRole;
     private final ServicePersonne servicePersonne;
     private final ServicePays servicePays;
@@ -34,7 +34,7 @@ public class ServiceCreationFilm {
         this.roleDAO = new RoleDAO(em);
         this.servicePersonne = new ServicePersonne(serviceLieu, realisateurDAO, acteurDAO, personneDAO);
         this.filmDAO = new FilmDAO(em);
-        this.serviceFilm = new FilmService(serviceRole, serviceLieu, filmDAO, roleDAO, servicePersonne, servicePays, serviceLangue,
+        this.serviceFilm = new ServiceFilm(serviceRole, serviceLieu, filmDAO, roleDAO, servicePersonne, servicePays, serviceLangue,
                 serviceGenre);
     }
 
