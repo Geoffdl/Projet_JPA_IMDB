@@ -3,9 +3,10 @@ package fr.diginamic.geoff.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "Pays")
+@Table(name = "Pays", uniqueConstraints = @UniqueConstraint(columnNames = "nom"))
 public class Pays
 {
     @Id
@@ -13,14 +14,13 @@ public class Pays
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paysId;
 
-    @Column(name = "nom", length = 50)
+    @Column(name = "nom", length = 100, nullable = false)
     private String nom;
 
     @Column(name = "url", length = 255)
     private String url;
 
-    @OneToMany
-    @JoinColumn(name = "film_id")
+    @OneToMany(mappedBy = "pays")
     private List<Film> films;
 
     public Pays()
@@ -88,5 +88,16 @@ public class Pays
      */
     public void setFilms(List<Film> films) {
         this.films = films;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Pays pays)) return false;
+        return Objects.equals(nom, pays.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nom);
     }
 }

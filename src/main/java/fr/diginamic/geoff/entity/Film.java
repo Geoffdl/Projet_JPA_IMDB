@@ -15,15 +15,15 @@ public class Film {
     @Column(name = "film_id", length = 11)
     private Long filmId;
 
-    @Column(name = "id_imdb", length = 9)
+    @Column(name = "id_imdb", length = 12)
     private String imdbId;
-    @Column(name = "titre", length = 50)
+    @Column(name = "titre", length = 255)
     private String titre;
     @Column(name = "annee")
     private Year annee;
     @Column(name = "rating")
     private Float rating;
-    @Column(name = "resume", length = 255)
+    @Column(name = "resume", length = 510)
     private String resume;
 
 
@@ -37,13 +37,31 @@ public class Film {
     @OneToMany(mappedBy = "film")
     private List<Role> roles = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "films")
+    @ManyToMany
+    @JoinTable(name = "Films_Langues",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "langue_id", referencedColumnName = "langue_id"))
     private List<Langue> langues = new ArrayList<>();
-    @ManyToMany(mappedBy = "films")
+
+
+    @ManyToMany
+    @JoinTable(name = "Films_Genres",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "genre_id"))
     private List<Genre> genres = new ArrayList<>();
-    @ManyToMany(mappedBy = "films")
+
+
+    @ManyToMany
+    @JoinTable(name = "Films_Realisateurs",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "realisateur_id", referencedColumnName = "personne_id"))
     private List<Realisateur> realisateurs = new ArrayList<>();
-    @ManyToMany(mappedBy = "films")
+
+
+    @ManyToMany
+    @JoinTable(name = "CastingPrincipal",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "acteur_id", referencedColumnName = "personne_id"))
     private List<Acteur> acteurs = new ArrayList<>();
 
 
@@ -288,4 +306,23 @@ public class Film {
         return Objects.hash(filmId);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Film{");
+        sb.append("filmId=").append(filmId);
+        sb.append(", imdbId='").append(imdbId).append('\'');
+        sb.append(", titre='").append(titre).append('\'');
+        sb.append(", annee=").append(annee);
+        sb.append(", rating=").append(rating);
+        sb.append(", resume='").append(resume).append('\'');
+        sb.append(", lieuTournage=").append(lieuTournage);
+        sb.append(", pays=").append(pays);
+        sb.append(", roles=").append(roles);
+        sb.append(", langues=").append(langues);
+        sb.append(", genres=").append(genres);
+        sb.append(", realisateurs=").append(realisateurs);
+        sb.append(", acteurs=").append(acteurs);
+        sb.append('}');
+        return sb.toString();
+    }
 }

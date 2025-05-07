@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Genres")
@@ -17,10 +18,7 @@ public class Genre
     @Column(name = "nom", length = 50)
     private String nom;
 
-    @ManyToMany
-    @JoinTable(name = "Films_Genres",
-            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
-            joinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "genre_id"))
+    @ManyToMany(mappedBy = "genres")
     private List<Film> films = new ArrayList<>();
 
 
@@ -72,5 +70,16 @@ public class Genre
      */
     public void setFilms(List<Film> films) {
         this.films = films;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Genre genre)) return false;
+        return Objects.equals(nom, genre.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nom);
     }
 }

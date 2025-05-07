@@ -4,21 +4,20 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.diginamic.geoff.dto.deserializer.LocalDateDeserializer;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
 /**
  * @author Geoff
- *
+ * <p>
  * Data Transfer Object for JSON to POJO conversion of naissances
- *
  */
-public class NaissanceDTO
-{
+public class NaissanceDTO {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dateNaissance;
 
     private String lieuNaissance;
 
-    public NaissanceDTO()
-    {
+    public NaissanceDTO() {
     }
 
     /**
@@ -64,5 +63,16 @@ public class NaissanceDTO
         sb.append(", lieuNaissance='").append(lieuNaissance).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof NaissanceDTO that)) return false;
+        return Objects.equals(lieuNaissance, that.lieuNaissance);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lieuNaissance);
     }
 }

@@ -1,14 +1,19 @@
 package fr.diginamic.geoff.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Objects;
+
 /**
  * @author Geoff
- *
+ * <p>
  * Data Transfer Object for JSON to POJO conversion of personnes
- *
  */
-public class PersonneDTO
-{
-    private String id;
+public class PersonneDTO implements NaturalIdentifiable {
+
+    @JsonProperty("id")
+    private String imdbId;
+
     private String identite;
     private String url;
     private NaissanceDTO naissance;
@@ -16,8 +21,7 @@ public class PersonneDTO
     /**
      * No args constructor
      */
-    public PersonneDTO()
-    {
+    public PersonneDTO() {
     }
 
 
@@ -26,17 +30,17 @@ public class PersonneDTO
      *
      * @return value of id
      */
-    public String getId() {
-        return id;
+    public String getImdbId() {
+        return imdbId;
     }
 
     /**
      * Sets id for the class PersonneDTO.
      *
-     * @param id value of id
+     * @param imdbId value of id
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     /**
@@ -96,11 +100,28 @@ public class PersonneDTO
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("PersonneDTO{");
-        sb.append("id='").append(id).append('\'');
+        sb.append("id='").append(imdbId).append('\'');
         sb.append(", identite='").append(identite).append('\'');
         sb.append(", url='").append(url).append('\'');
         sb.append(", naissance=").append(naissance);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public String getNaturalId() {
+        return imdbId;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        PersonneDTO that = (PersonneDTO) object;
+        return Objects.equals(imdbId, that.imdbId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(imdbId);
     }
 }

@@ -12,10 +12,7 @@ public class Acteur extends Personne
     private Float taille;
 
 
-    @ManyToMany
-    @JoinTable(name = "CastingPrincipal",
-            joinColumns = @JoinColumn(name = "acteur_id", referencedColumnName = "personne_id"),
-            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"))
+    @ManyToMany(mappedBy = "acteurs")
     List<Film> films;
 
     @OneToMany(mappedBy = "acteur")
@@ -78,4 +75,6 @@ public class Acteur extends Personne
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+
 }

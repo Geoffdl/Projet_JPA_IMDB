@@ -1,19 +1,18 @@
 package fr.diginamic.geoff.dto;
 
+import java.util.Objects;
+
 /**
  * @author Geoff
- *
+ * <p>
  * Data Transfer Object for JSON to POJO conversion of pays
- *
  */
-public class PaysDto
-{
+public class PaysDTO implements NaturalIdentifiable{
     private String nom;
     private String url;
 
 
-    public PaysDto()
-    {
+    public PaysDTO() {
     }
 
     /**
@@ -59,5 +58,21 @@ public class PaysDto
         sb.append(", url='").append(url).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public String getNaturalId() {
+        return nom;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof PaysDTO paysDTO)) return false;
+        return Objects.equals(nom, paysDTO.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nom);
     }
 }

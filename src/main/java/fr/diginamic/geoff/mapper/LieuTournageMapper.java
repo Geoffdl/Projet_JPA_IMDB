@@ -10,9 +10,9 @@ public class LieuTournageMapper implements EntityMapper<LieuTournageDTO, Lieu> {
     public Lieu mapToEntity(LieuTournageDTO dto) {
         Lieu lieu = new Lieu();
 
-        lieu.setRegion(dto.getEtatDept());
-        lieu.setVille(dto.getVille());
+        lieu.setRegion(dto.getEtatDept().trim());
+        lieu.setVille(dto.getVille().trim());
 
-        return null;
+        return lieu;
     }
 }

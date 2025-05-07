@@ -1,23 +1,26 @@
 package fr.diginamic.geoff.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fr.diginamic.geoff.dto.deserializer.FloatDeserializer;
 import fr.diginamic.geoff.dto.deserializer.YearDeserializer;
 
 import java.time.Year;
 import java.util.List;
+
 /**
  * @author Geoff
- *
+ * <p>
  * Data Transfer Object for JSON to POJO conversion of films
- *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FilmDTO
-{
-    private String id;
-    private PaysDto pays;
+public class FilmDTO implements NaturalIdentifiable {
+
+    @JsonProperty("id")
+    private String imdbId;
+
+    private PaysDTO pays;
     private String nom;
     private String url;
 
@@ -39,14 +42,13 @@ public class FilmDTO
     @JsonDeserialize(using = YearDeserializer.class)
     private Year anneeSortie;
 
-    private List<RoleDTO> role;
+    private List<RoleDTO> roles;
     private List<String> genres;
 
     /**
      * No arg constructor
      */
-    public FilmDTO()
-    {
+    public FilmDTO() {
     }
 
     /**
@@ -54,17 +56,17 @@ public class FilmDTO
      *
      * @return value of id
      */
-    public String getId() {
-        return id;
+    public String getImdbId() {
+        return imdbId;
     }
 
     /**
      * Sets id for the class FilmDTO.
      *
-     * @param id value of id
+     * @param imdbId value of id
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     /**
@@ -72,7 +74,7 @@ public class FilmDTO
      *
      * @return value of pays
      */
-    public PaysDto getPays() {
+    public PaysDTO getPays() {
         return pays;
     }
 
@@ -81,7 +83,7 @@ public class FilmDTO
      *
      * @param pays value of pays
      */
-    public void setPays(PaysDto pays) {
+    public void setPays(PaysDTO pays) {
         this.pays = pays;
     }
 
@@ -252,17 +254,17 @@ public class FilmDTO
      *
      * @return value of role
      */
-    public List<RoleDTO> getRole() {
-        return role;
+    public List<RoleDTO> getRoles() {
+        return roles;
     }
 
     /**
      * Sets role for the class FilmDTO.
      *
-     * @param role value of role
+     * @param roles value of role
      */
-    public void setRole(List<RoleDTO> role) {
-        this.role = role;
+    public void setRoles(List<RoleDTO> roles) {
+        this.roles = roles;
     }
 
     /**
@@ -286,7 +288,7 @@ public class FilmDTO
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FilmDTO{");
-        sb.append("id='").append(id).append('\'');
+        sb.append("id='").append(imdbId).append('\'');
         sb.append(", pays=").append(pays);
         sb.append(", nom='").append(nom).append('\'');
         sb.append(", url='").append(url).append('\'');
@@ -297,9 +299,14 @@ public class FilmDTO
         sb.append(", realisateurs=").append(realisateurs);
         sb.append(", castingPrincipal=").append(castingPrincipal);
         sb.append(", anneeSortie=").append(anneeSortie);
-        sb.append(", role=").append(role);
+        sb.append(", role=").append(roles);
         sb.append(", genres=").append(genres);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public String getNaturalId() {
+        return imdbId;
     }
 }

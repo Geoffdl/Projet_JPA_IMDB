@@ -1,0 +1,55 @@
+package fr.diginamic.geoff.utils;
+
+public class PaysUtils {
+
+
+    /**
+     * Splits lieu de naissance and extract the country from it
+     * @param lieuNaissance raw lieu string
+     * @return country string
+     */
+    public static String extractPaysFromLieuNaissance(String lieuNaissance) {
+        if (lieuNaissance == null) {
+            return null;
+        }
+        String[] parts = lieuNaissance.split(",");
+
+        return parts[parts.length -1];
+    }
+
+
+    /**
+     * Cleans up a messy country string and extracts the most likely country name
+     * @param rawCountry the raw country string
+     * @return cleaned country name
+     */
+    public static String cleanCountryName(String rawCountry) {
+        if (rawCountry == null) return null;
+
+        String cleaned = rawCountry;
+
+        // Handle "[now Country]" pattern
+        if (cleaned.contains("[now")) {
+            int start = cleaned.indexOf("[now") + 4;
+            int end = cleaned.indexOf("]", start);
+            if (end > start) {
+                cleaned = cleaned.substring(start, end).trim();
+                return cleaned;
+            }
+        }
+
+        // Remove anything in brackets or parentheses
+        cleaned = cleaned.replaceAll("\\[.*?\\]", "");
+        cleaned = cleaned.replaceAll("\\(.*?\\)", "");
+
+        // Remove stray trailing or leading non-letter characters (like ']')
+        cleaned = cleaned.replaceAll("^[^\\p{L}]+|[^\\p{L}]+$", "");
+
+
+        if(cleaned.trim().isEmpty()){
+            return null;
+        }
+        return cleaned.trim();
+    }
+
+}

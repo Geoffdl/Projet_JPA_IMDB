@@ -19,7 +19,7 @@ public class Role
     @JoinColumn(name = "film_id", referencedColumnName = "film_id")
     private Film film;
 
-    @Column(name = "personnage", length = 50)
+    @Column(name = "personnage", length = 100)
     private String personnage;
 
 
@@ -36,14 +36,6 @@ public class Role
         return roleId;
     }
 
-    /**
-     * Sets roleId for the class Role.
-     *
-     * @param roleId value of roleId
-     */
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
 
     /**
      * Gets acteur for the class Role
