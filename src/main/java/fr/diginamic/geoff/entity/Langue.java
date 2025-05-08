@@ -1,6 +1,8 @@
 package fr.diginamic.geoff.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "langues")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Langue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +22,7 @@ public class Langue {
     private String nom;
 
     @ManyToMany(mappedBy = "langues")
-
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private List<Film> films = new ArrayList<>();
 
     public Langue() {

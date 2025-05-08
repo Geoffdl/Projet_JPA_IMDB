@@ -44,8 +44,8 @@ public class FilmDAO
             transaction.commit();
         } catch (Exception e) {
             if (transaction.isActive()) transaction.rollback();
-            LOGGER.error("Couldn't create movie : {}", e);
-            throw e;
+            LOGGER.error("Transaction Error : {}", e.getMessage());
+
         }
     }
 }

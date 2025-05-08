@@ -39,11 +39,6 @@ public class ServiceFilm {
         this.serviceRole = serviceRole;
     }
 
-    /**
-     * Film owns :
-     * Pays, Lieu, Genres, Langues, Acteurs, Realisateurs, Casting
-     */
-
     public Film getOrCreateFilm(FilmDTO filmDTO) {
         if (filmDTO == null) {
             return null;

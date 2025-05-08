@@ -1,41 +1,110 @@
 <configuration>
+    <!-- Set up the log directory -->
+    <property name="LOG_DIR" value="logs" />
 
-<!-- Appender for service logs -->
-<appender name="SERVICE_FILE" class="ch.qos.logback.core.FileAppender">
-    <file>logs/service.log</file>
-    <append>true</append>
-    <encoder>
-        <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger{36}] - %msg%n</pattern>
-    </encoder>
-    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-        <level>INFO</level>
-    </filter>
-</appender>
+    <!-- INFO level logs -->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/info.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger{36}] - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/archived/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
-<!-- Root logger: minimal console output -->
-<root level="WARN">
-    <appender-ref ref="CONSOLE" />
-</root>
+    <!-- WARN level logs -->
+    <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/warn.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger{36}] - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/archived/warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
-<!-- Console appender (optional, for dev) -->
-<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-    </encoder>
-</appender>
+    <!-- ERROR level logs -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/error.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger{36}] - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/archived/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
-<!-- Logger for your service package -->
-<logger name="fr.diginamic.geoff.service" level="INFO" additivity="false">
-    <appender-ref ref="SERVICE_FILE" />
-</logger>
+    <!-- All logs for your app (including info, warn, error) -->
+    <appender name="ALL_APP_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/application.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger{36}] - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/archived/application.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
 
-<!-- Hibernate and DB noise suppression -->
-<logger name="org.hibernate" level="WARN"/>
-<logger name="org.hibernate.SQL" level="WARN"/>
-<logger name="org.hibernate.type" level="WARN"/>
-<logger name="org.hibernate.stat" level="WARN"/>
-<logger name="org.hibernate.tool.hbm2ddl" level="WARN"/>
-<logger name="org.mariadb" level="WARN"/>
-<logger name="org.mariadb.jdbc" level="WARN"/>
+    <!-- Console appender (for development) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configure loggers -->
+
+    <!-- Your application logger -->
+    <logger name="fr.diginamic.geoff" level="INFO" additivity="false">
+        <appender-ref ref="INFO_FILE" />
+        <appender-ref ref="WARN_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+        <appender-ref ref="ALL_APP_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <!-- Hibernate and DB noise suppression -->
+    <logger name="org.hibernate" level="WARN">
+        <appender-ref ref="WARN_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+        <appender-ref ref="ALL_APP_FILE" />
+    </logger>
+
+    <logger name="org.hibernate.SQL" level="WARN">
+        <appender-ref ref="WARN_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+    </logger>
+
+    <logger name="org.mariadb" level="WARN">
+        <appender-ref ref="WARN_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+    </logger>
+
+    <!-- Root logger -->
+    <root level="WARN">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="WARN_FILE" />
+        <appender-ref ref="ERROR_FILE" />
+    </root>
 
 </configuration>

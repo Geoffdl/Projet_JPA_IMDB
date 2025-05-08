@@ -45,6 +45,9 @@ public class PaysDAO {
             TypedQuery<Pays> query = entityManager.createQuery(
                     "SELECT p FROM Pays p WHERE p.nom = :nom", Pays.class);
             query.setParameter("nom", nom);
+
+            query.setHint("org.hibernate.cacheable", "true");
+
             return Optional.of(query.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();

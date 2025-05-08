@@ -25,6 +25,9 @@ public class GenreDAO
             TypedQuery<Genre> query = em.createQuery(
                     "SELECT g FROM Genre g WHERE g.nom = :nom", Genre.class);
             query.setParameter("nom", nom);
+
+            query.setHint("org.hibernate.cacheable", "true");
+
             return Optional.of(query.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();

@@ -54,6 +54,7 @@ public class ServicePersonne {
             if (personne instanceof Acteur acteur) {
                 return acteur;
             }
+            return null;
 
         }
 
@@ -89,6 +90,7 @@ public class ServicePersonne {
             if (personne instanceof Realisateur realisateur) {
                 return realisateur;
             }
+            return null;
         }
 
         Realisateur newRealisateur = realisateurMapper.mapToEntity(personneDTO);

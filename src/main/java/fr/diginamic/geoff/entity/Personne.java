@@ -7,7 +7,9 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "Personnes")
+@Table(name = "Personnes",
+        indexes = {@Index(name = "index_personne_imdbid", columnList = "id_imdb")},
+        uniqueConstraints = @UniqueConstraint(name = "uc_id_imdb", columnNames = "id_imdb"))
 public abstract class Personne {
     @Id
     @Column(name = "personne_id", length = 11)

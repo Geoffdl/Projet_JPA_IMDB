@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Films")
+@Table(name = "Films",
+        indexes = {@Index(name = "index_film_imdbid", columnList = "id_imdb")},
+        uniqueConstraints = @UniqueConstraint(name = "uc_id_imdb", columnNames = "id_imdb"))
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +50,7 @@ public class Film {
     @JoinTable(name = "Films_Genres",
             joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "genre_id"))
+
     private List<Genre> genres = new ArrayList<>();
 
 

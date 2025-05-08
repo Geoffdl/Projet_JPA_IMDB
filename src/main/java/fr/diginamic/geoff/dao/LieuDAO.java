@@ -21,6 +21,7 @@ public class LieuDAO {
                     Lieu.class);
             query.setParameter("ville", ville);
             query.setParameter("region", region);
+
             return Optional.of(query.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();

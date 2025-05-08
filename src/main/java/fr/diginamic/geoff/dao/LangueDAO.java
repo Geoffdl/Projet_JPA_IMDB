@@ -24,6 +24,9 @@ public class LangueDAO implements Dao<Langue> {
             TypedQuery<Langue> query = em.createQuery(
                     "SELECT l FROM Langue l WHERE l.nom = :nom", Langue.class);
             query.setParameter("nom", nom);
+
+            query.setHint("org.hibernate.cacheable", "true");
+
             return Optional.of(query.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
